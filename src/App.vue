@@ -1,7 +1,13 @@
 <script setup></script>
 
 <template>
-  <h1>初始化</h1>
+  <div class="main">
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.main {
+  background: #f5f5f5;
+}
+</style>
