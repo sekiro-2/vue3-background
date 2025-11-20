@@ -2,47 +2,40 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
 // 头部切换路由进度条
 import 'nprogress/nprogress.css' // 引入样式
+
+
+
+const Layout = () => import('@/Layout/index.vue')
+export const constantRoutes = [
+  {
+    path: '/',
+    name: 'Root',
+    component: Layout,
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/Home/dashboard/index.vue')
+      },
+      {
+        path: '/monery',
+        name: 'monery',
+        component: () => import('@/views/Home/monery/index.vue')
+      }
+    ]
+  },
+
+]
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      component: () => import('@/views/Home/index.vue'),
-      redirect: '/home/dashboard', // 访问 /home 时自动跳转 dashboard,重定向
-    },
-    {
-      path: '/login',
-      component: () => import('@/views/Login/index.vue'),
-    },
-    {
-      path: '/home',
-      component: () => import('@/views/Home/index.vue'),
+  routes: constantRoutes,
 
-      children: [
-        {
-          path: '/home/dashboard',
-          component: () => import('@/views/Home/dashboard/index.vue'),
-        },
-        {
-          path: '/home/org',
-          component: () => import('@/views/Home/org/index.vue'),
-        },
-        {
-          path: '/home/customer',
-          component: () => import('@/views/Home/customer/index.vue'),
-        },
-        {
-          path: '/home/monery',
-          component: () => import('@/views/Home/monery/index.vue'),
-        },
-        {
-          path: '/home/setting',
-          component: () => import('@/views/Home/setting/index.vue'),
-        },
-      ],
-    },
-  ],
 })
+// 全局注册路由
+export function setupRouter(app) {
+  app.use(router);
+}
 // 路由开始切换时
 router.beforeEach((to, from, next) => {
   NProgress.start() // 开始进度条
