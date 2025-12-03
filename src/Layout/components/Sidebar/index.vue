@@ -1,13 +1,14 @@
 <script setup>
-import { computed } from 'vue'
 import SidebarLogo from './components/SidebarLogo.vue'
-import SideMenu from './components/SideMenu.vue'
-import { useAppStore } from '@/stores'
+import SidebarMenu from './components/SidebarMenu.vue'
+import { useAppStore, useRouterStore } from '@/stores'
 const appStore = useAppStore()
-const toggle = computed(() => appStore.sideBarStare)
+const routerStore = useRouterStore()
 </script>
 
 <template>
-  <SidebarLogo :toggle="toggle"></SidebarLogo>
-  <SideMenu></SideMenu>
+  <SidebarLogo :toggle="appStore.sideBarStare"></SidebarLogo>
+  <el-scrollbar>
+    <SidebarMenu :data="routerStore.router" :toggle="appStore.sideBarStare"></SidebarMenu>
+  </el-scrollbar>
 </template>

@@ -1,3 +1,6 @@
 .el-menu {
   border: none !important;
 }
+.el-scrollbar {
+  height: calc(100vh - 50px) !important;
+}

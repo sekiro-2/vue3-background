@@ -3,7 +3,6 @@ const props = defineProps({
   toggle: Boolean,
 })
 </script>
-
 <template>
   <div class="logo" :class="{ collapse: toggle }">
     <transition enter-active-class="animate__animated animate__fadeInLeft">
@@ -32,7 +31,7 @@ const props = defineProps({
     align-items: center;
 
     img {
-      height: 38px;
+      height: 32px;
       margin-right: 5px;
     }
     .title {
