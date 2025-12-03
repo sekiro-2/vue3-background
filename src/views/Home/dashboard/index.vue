@@ -1,6 +1,6 @@
 <script setup>
 import { useRouterStore } from '@/stores'
-import { constantRoutes } from '@/router'
+
 const useRouter = useRouterStore()
 </script>
 

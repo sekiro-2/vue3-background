@@ -30,6 +30,9 @@ export default defineConfig([
     rules: {
       // 关闭单词名限制（允许 index.vue / menu.vue）
       'vue/multi-word-component-names': 'off',
+      // 关闭未使用变量报错
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
 ])
