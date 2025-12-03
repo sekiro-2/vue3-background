@@ -1,5 +1,4 @@
 
-
 import { setupRouter } from "@/router";
 import { setupStore } from "@/stores";
 

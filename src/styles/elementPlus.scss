@@ -4,3 +4,8 @@
 .el-scrollbar {
   height: calc(100vh - 50px) !important;
 }
+
+// 隐藏 el-sub-menu 的箭头图标
+.el-sub-menu__icon-arrow {
+  display: none !important;
+}

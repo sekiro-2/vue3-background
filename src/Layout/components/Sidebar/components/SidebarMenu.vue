@@ -14,6 +14,11 @@ const props = defineProps({
     :collapse-transition="false"
     router
   >
-    <SidebarMenuItem v-for="data in props.data" :key="data.path" :item="data"></SidebarMenuItem>
+    <SidebarMenuItem
+      v-for="data in props.data"
+      :key="data.path"
+      :item="data"
+      :collapse="props.toggle"
+    ></SidebarMenuItem>
   </el-menu>
 </template>

@@ -7,5 +7,5 @@ const toggle = () => {
 </script>
 
 <template>
-  <el-button @click="toggle">123</el-button>
+  <el-button @click="toggle">折叠</el-button>
 </template>

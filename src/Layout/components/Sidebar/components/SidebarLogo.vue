@@ -6,7 +6,7 @@ const props = defineProps({
 <template>
   <div class="logo" :class="{ collapse: toggle }">
     <transition enter-active-class="animate__animated animate__fadeInLeft">
-      <router-link :key="+toggle" to="/">
+      <router-link :key="+toggle" to="/dashboard">
         <img src="@/assets/logo.png" alt="" />
         <span v-if="!toggle" class="title">后台企业管理系统</span>
       </router-link>
