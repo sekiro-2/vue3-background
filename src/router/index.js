@@ -11,9 +11,11 @@ export const constantRoutes = [
     path: '/',
     name: 'Root',
     component: Layout,
+    redirect: "/dashboard",
+
     children: [
       {
-        path: 'dashboard',
+        path: '/dashboard',
         name: 'dashboard',
         component: () => import('@/views/Home/dashboard/index.vue')
       },

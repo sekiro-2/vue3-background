@@ -1,8 +1,8 @@
 
 
 import { setupRouter } from "@/router";
-import { setupStore } from "@/store";
-;
+import { setupStore } from "@/stores";
+
 
 export default {
   install(app) {
@@ -10,7 +10,7 @@ export default {
     setupRouter(app);
     // 状态管理(store)
     setupStore(app);
-    
+
 
   },
 };

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
+    "animate.css": "^4.1.1",
     "element-plus": "^2.11.7",
     "husky": "^9.1.7",
     "nprogress": "^0.2.0",

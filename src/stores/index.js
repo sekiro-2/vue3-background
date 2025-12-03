@@ -11,6 +11,7 @@ export function setupStore(app) {
 }
 
 export * from "./modules/router.store";
+export * from "./modules/app.store";
 
 
 export { store };
