@@ -4,24 +4,30 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // 引入样式
 
 
-// import DeleteIcon from '@/components/Icon/DeleteIcon.vue'
 const Layout = () => import('@/Layout/index.vue')
 export const constantRoutes = [
   {
     path: '/',
     name: 'Root',
-    redirect: "/dasboard",
     meta: { hidden: true },
-    component: Layout,
+    redirect: '/dashboard',
+  },
+  {
+    path: '/login',
+    name: 'login',
+    meta: { hidden: true },
+    component: () => import('@/views/Login/index.vue'),
   },
   // --------------------
   // 1. 数据展示
   // --------------------
   {
+    path: '/dashboard',
     component: Layout,
     children: [
       {
         path: '/dashboard',
+        name: 'Dashboard',
         meta: {
           title: '数据展示',
           icon: 'WorkIcon'
@@ -228,6 +234,7 @@ export const constantRoutes = [
   // 9. 404
   // --------------------
   {
+    path: '/:pathMatch(.*)*',
     component: Layout,
     meta: { hidden: true },
     children: [
