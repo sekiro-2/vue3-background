@@ -5,6 +5,7 @@ import App from './App.vue'
 import '@/styles/index.scss'
 import 'element-plus/dist/index.css'
 import 'animate.css';
+import 'uno.css'
 const app = createApp(App)
 // 自动注册 Icon 组件
 const modules = import.meta.glob('@/components/Icon/*.vue', { eager: true })

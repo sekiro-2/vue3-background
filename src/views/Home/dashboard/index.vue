@@ -4,6 +4,6 @@ import { useRouterStore } from '@/stores'
 const useRouter = useRouterStore()
 </script>
 
-<template>首屏展示页</template>
+<template><div class="p-4 m-2 bg-blue-500 rounded">Hello UnoCSS</div></template>
 
 <style scoped lang="scss"></style>

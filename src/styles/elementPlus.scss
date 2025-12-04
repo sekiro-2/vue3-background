@@ -5,7 +5,7 @@
   height: calc(100vh - 50px) !important;
 }
 
-// 隐藏 el-sub-menu 的箭头图标
-.el-sub-menu__icon-arrow {
+/* 折叠状态隐藏子菜单箭头 */
+.el-menu--collapse .el-sub-menu__icon-arrow {
   display: none !important;
 }

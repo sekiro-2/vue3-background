@@ -27,6 +27,7 @@ $aisdeWidth: 210px;
 .collapse {
   width: 63px !important;
 }
+
 .layout {
   width: 100%;
   height: 100%;

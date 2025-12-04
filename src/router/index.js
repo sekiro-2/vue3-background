@@ -10,70 +10,234 @@ export const constantRoutes = [
   {
     path: '/',
     name: 'Root',
-    redirect: "/dashboard",
+    redirect: "/dasboard",
+    meta: { hidden: true },
     component: Layout,
-    meta: {
-      title: '工作台',
-      icon: 'workIcon'
-    },
-
+  },
+  // --------------------
+  // 1. 数据展示
+  // --------------------
+  {
+    component: Layout,
     children: [
       {
         path: '/dashboard',
-        name: 'dashboard',
         meta: {
-          title: '首页',
-          icon: 'HomeIcon'
+          title: '数据展示',
+          icon: 'WorkIcon'
         },
         component: () => import('@/views/Home/dashboard/index.vue')
-      },
-      {
-        path: '/monery',
-        name: 'monery',
-        meta: {
-          title: '工资',
-          icon: 'moneryIcon'
-        },
-        component: () => import('@/views/Home/monery/index.vue'),
-
-      },
-
-      {
-        path: '/org',
-        name: 'org',
-        meta: {
-          title: '组织',
-          icon: 'OrganizeIcon'
-        },
-        component: () => import('@/views/Home/org/index.vue')
-      },
-      {
-        path: '/customer',
-        name: 'customer',
-        meta: {
-          title: '员工',
-          icon: 'customerIcon'
-        },
-        component: () => import('@/views/Home/customer/index.vue')
-      },
-
+      }
     ]
   },
-  // 错误路由跳转
+  // --------------------
+  // 2. 组织人事
+  // --------------------
   {
+    path: '/org',
+    name: 'Org',
     component: Layout,
-    meta: {
-      hidden: true
-    },
+    redirect: '/org/employee',
+    meta: { title: '组织人事', icon: 'OrganizeIcon' },
     children: [
       {
-        path: '/:pathMatch(.*)*', // 匹配任意路径
+        path: '/org/employee',
+        name: 'Employee',
+        component: () => import('@/views/Home/dashboard/index.vue'),
+        meta: { title: '员工管理', icon: 'employee' }
+      },
+      {
+        path: '/org/dept',
+        name: 'Dept',
+        // component: () => import('@/views/org/dept.vue'),
+        meta: { title: '部门管理', icon: 'department' }
+      },
+      {
+        path: '/org/post',
+        name: 'Post',
+        // component: () => import('@/views/org/post.vue'),
+        meta: { title: '岗位管理', icon: 'position' }
+      },
+      {
+        path: '/org/role',
+        name: 'Role',
+        // component: () => import('@/views/org/role.vue'),
+        meta: { title: '角色与权限', icon: 'permission' }
+      }
+    ]
+  },
+
+  // --------------------
+  // 3. 考勤管理
+  // --------------------
+  {
+    path: '/attendance',
+    name: 'Attendance',
+    component: Layout,
+    redirect: '/attendance/record',
+    meta: { title: '考勤管理' },
+    children: [
+      {
+        path: '/attendance/record',
+        name: 'AttendanceRecord',
+        // component: () => import('@/views/attendance/record.vue'),
+        meta: { title: '打卡记录', icon: 'Document' }
+      },
+      {
+        path: '/attendance/schedule',
+        name: 'AttendanceSchedule',
+        // component: () => import('@/views/attendance/schedule.vue'),
+        meta: { title: '排班管理', icon: 'Collection' }
+      },
+      {
+        path: '/attendance/leave',
+        name: 'AttendanceLeave',
+        // component: () => import('@/views/attendance/leave.vue'),
+        meta: { title: '请假管理', icon: 'Tickets' }
+      }
+    ]
+  },
+
+  // --------------------
+  // 4. 流程中心
+  // --------------------
+  {
+    path: '/workflow',
+    name: 'Workflow', component: Layout,
+    redirect: '/workflow/todo',
+    meta: { title: '流程中心', icon: 'Stamp' },
+    children: [
+      {
+        path: '/workflow/todo',
+        name: 'WorkflowTodo',
+        // component: () => import('@/views/workflow/todo.vue'),
+        meta: { title: '我的审批', icon: 'Bell' }
+      },
+      {
+        path: '/workflow/manage',
+        name: 'WorkflowManage',
+        // component: () => import('@/views/workflow/manage.vue'),
+        meta: { title: '流程管理', icon: 'Setting' }
+      }
+    ]
+  },
+
+  // --------------------
+  // 5. 业务模块
+  // --------------------
+  {
+    path: '/business',
+    name: 'Business', component: Layout,
+    redirect: '/business/customer',
+    meta: { title: '业务模块', icon: 'Briefcase' },
+    children: [
+      {
+        path: '/business/customer',
+        name: 'Customer',
+        // component: () => import('@/views/business/customer.vue'),
+        meta: { title: '客户管理', icon: 'User' }
+      },
+      {
+        path: '/business/order',
+        name: 'Order',
+        // component: () => import('@/views/business/order.vue'),
+        meta: { title: '订单管理', icon: 'Document' }
+      },
+      {
+        path: '/business/product',
+        name: 'Product',
+        // component: () => import('@/views/business/product.vue'),
+        meta: { title: '产品管理', icon: 'Box' }
+      }
+    ]
+  },
+
+  // --------------------
+  // 6. 数据报表
+  // --------------------
+  {
+    path: '/report',
+    name: 'Report', component: Layout,
+    redirect: '/report/operation',
+    meta: { title: '数据报表', icon: 'PieChart' },
+    children: [
+      {
+        path: '/report/operation',
+        name: 'OperationReport',
+        // component: () => import('@/views/report/operation.vue'),
+        meta: { title: '运营数据', icon: 'TrendCharts' }
+      },
+      {
+        path: '/report/employeeNum',
+        name: 'EmployeeReport',
+        // component: () => import('@/views/report/employee.vue'),
+        meta: { title: '员工数据统计', icon: 'Histogram' }
+      }
+    ]
+  },
+
+  // --------------------
+  // 7. 系统工具
+  // --------------------
+  {
+    path: '/tools',
+    name: 'Tools', component: Layout,
+    redirect: '/tools/log',
+    meta: { title: '系统工具', icon: 'Tools' },
+    children: [
+      {
+        path: '/tools/log',
+        name: 'LogManage',
+        // component: () => import('@/views/tools/log.vue'),
+        meta: { title: '日志管理', icon: 'Document' }
+      },
+      {
+        path: '/tools/online',
+        name: 'OnlineUser',
+        // component: () => import('@/views/tools/online.vue'),
+        meta: { title: '在线用户', icon: 'UserFilled' }
+      }
+    ]
+  },
+
+  // --------------------
+  // 8. 系统设置
+  // --------------------
+  {
+    path: '/setting',
+    name: 'Setting', component: Layout,
+    redirect: '/setting/profile',
+    meta: { title: '系统设置', icon: 'Setting' },
+    children: [
+      {
+        path: '/setting/profile',
+        name: 'Profile',
+        // component: () => import('@/views/setting/profile.vue'),
+        meta: { title: '个人中心', icon: 'User' }
+      },
+      {
+        path: '/setting/system',
+        name: 'SystemConfig',
+        // component: () => import('@/views/setting/system.vue'),
+        meta: { title: '系统参数', icon: 'Tools' }
+      }
+    ]
+  },
+
+  // --------------------
+  // 9. 404
+  // --------------------
+  {
+    component: Layout,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '/:pathMatch(.*)*',
         meta: { hidden: true },
         component: () => import('@/views/Error/404.vue')
       }
     ]
   }
-
 ]
 
 const router = createRouter({

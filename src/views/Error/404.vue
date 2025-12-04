@@ -1,6 +1,8 @@
 <template>
   <img src="@/assets/Error/404.png" alt="" />
-  <el-button class="button" type="success" round @click="$router.push('/')">返回首页</el-button>
+  <el-button class="button" type="success" round @click="$router.push('/dashboard')"
+    >返回首页</el-button
+  >
 </template>
 <style scoped lang="scss">
 img {
