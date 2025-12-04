@@ -81,7 +81,7 @@ export const constantRoutes = [
     name: 'Attendance',
     component: Layout,
     redirect: '/attendance/record',
-    meta: { title: '考勤管理' },
+    meta: { title: '考勤管理', icon: 'WorkIcon' },
     children: [
       {
         path: '/attendance/record',

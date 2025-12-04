@@ -24,7 +24,7 @@ const componentIcon = props?.icon?.endsWith('Icon')
 .Svgicon,
 .el-icon {
   width: 24px;
-  height: 14px;
-  margin-right: 5px;
+  height: 16px;
+  margin-right: 4px;
 }
 </style>

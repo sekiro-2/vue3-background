@@ -1,6 +1,7 @@
 <script setup>
 import SidebarMenuItem from './SidebarMenuItem.vue'
 import SidebarMenuItemTitle from './SidebarMenuItenTitle.vue'
+
 const props = defineProps({
   item: Object,
   collapse: Boolean,
@@ -13,15 +14,14 @@ const props = defineProps({
       <template v-if="!item.children">
         <el-menu-item :index="item.path" v-if="!item?.meta?.hidden">
           <SidebarMenuItemTitle :icon="item?.meta?.icon" />
-          <template #title> {{ item?.meta?.title }} </template>
+          <el-icon><icon-menu /></el-icon>
+          {{ item?.meta?.title }}
         </el-menu-item>
       </template>
       <template v-else>
         <el-menu-item :index="item.children[0].path">
-          <template #title>
-            <SidebarMenuItemTitle :icon="item?.children[0].meta?.icon" />
-            {{ item?.children[0].meta?.title }}
-          </template>
+          <SidebarMenuItemTitle :icon="item?.children[0].meta?.icon" />
+          <span v-if="!collapse"> {{ item?.children[0].meta?.title }}</span>
         </el-menu-item>
       </template>
     </template>
