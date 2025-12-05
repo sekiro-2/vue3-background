@@ -2,6 +2,7 @@
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Toggle from './components/Toggle.vue'
 import User from './components/User.vue'
+import Fullscreen from '@/components/Fullscreen/index.vue'
 </script>
 
 <template>
@@ -12,8 +13,11 @@ import User from './components/User.vue'
       <!-- 面包屑 -->
       <Breadcrumb></Breadcrumb>
     </div>
-    <!-- 导航栏右侧 -->
+    <!-- 导航栏功能右侧区域 -->
     <div class="navbar__right">
+      <!-- 全屏 -->
+      <Fullscreen></Fullscreen>
+      <!-- 用户中心 -->
       <User></User>
     </div>
   </div>
@@ -24,13 +28,17 @@ import User from './components/User.vue'
   justify-content: space-between;
   height: 50px;
   align-items: center;
-
-  &__left {
+  .navbar__left {
     display: flex;
     align-items: center;
   }
-  &__right {
+  .navbar__right {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    .fullscreen {
+      margin-right: 8px;
+    }
   }
 }
 </style>
