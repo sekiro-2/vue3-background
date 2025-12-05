@@ -32,7 +32,6 @@ export default defineConfig({
   },
   server: {
     host: 'localhost', // 服务器主机名
-    https: false, // 是否启用 HTTPS
     cors: true, // 是否启用 CORS
     open: true, // 是否自动打开浏览器
     port: 3600, // 服务器端口号

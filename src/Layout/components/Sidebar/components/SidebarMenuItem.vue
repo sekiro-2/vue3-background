@@ -14,7 +14,7 @@ const props = defineProps({
       <template v-if="!item.children">
         <el-menu-item :index="item.path" v-if="!item?.meta?.hidden">
           <SidebarMenuItemTitle :icon="item?.meta?.icon" />
-          <el-icon><icon-menu /></el-icon>
+
           {{ item?.meta?.title }}
         </el-menu-item>
       </template>

@@ -29,7 +29,7 @@ export const constantRoutes = [
         path: '/dashboard',
         name: 'Dashboard',
         meta: {
-          title: '数据展示',
+          title: '首页',
           icon: 'WorkIcon'
         },
         component: () => import('@/views/Home/dashboard/index.vue')
@@ -49,8 +49,10 @@ export const constantRoutes = [
       {
         path: '/org/employee',
         name: 'Employee',
+        redirect: '/org/employee/1',
         component: () => import('@/views/Home/dashboard/index.vue'),
-        meta: { title: '员工管理', icon: 'employee' }
+        meta: { title: '员工管理', icon: 'employee' },
+
       },
       {
         path: '/org/dept',
@@ -62,7 +64,7 @@ export const constantRoutes = [
         path: '/org/post',
         name: 'Post',
         // component: () => import('@/views/org/post.vue'),
-        meta: { title: '岗位管理', icon: 'position' }
+        meta: { title: '岗位管理', icon: 'position' },
       },
       {
         path: '/org/role',
