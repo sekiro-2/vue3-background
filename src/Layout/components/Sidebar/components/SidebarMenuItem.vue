@@ -34,3 +34,9 @@ const props = defineProps({
     </el-sub-menu>
   </div>
 </template>
+<style>
+/* 子菜单背景 */
+/* .el-submenu .el-menu {
+  background-color: #36a44d !important;
+} */
+</style>

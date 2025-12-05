@@ -1,5 +1,6 @@
 <script setup>
 import SidebarMenuItem from './SidebarMenuItem.vue'
+import { useAppStore } from '@/stores'
 const props = defineProps({
   toggle: Boolean,
   data: Array,
@@ -12,6 +13,8 @@ const props = defineProps({
     :collapse="props.toggle"
     :unique-opened="false"
     :collapse-transition="false"
+    :background-color="useAppStore().themeColor"
+    text-color="#fff"
     router
   >
     <SidebarMenuItem
