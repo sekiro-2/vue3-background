@@ -12,3 +12,8 @@ const routerStore = useRouterStore()
     <SidebarMenu :data="routerStore.router" :toggle="appStore.sideBarStare"></SidebarMenu>
   </el-scrollbar>
 </template>
+<style scoped>
+.el-scrollbar {
+  height: calc(100vh - 50px) !important;
+}
+</style>

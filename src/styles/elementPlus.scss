@@ -1,9 +1,6 @@
 .el-menu {
   border: none !important;
 }
-.el-scrollbar {
-  height: calc(100vh - 50px) !important;
-}
 
 /* 折叠状态隐藏子菜单箭头 */
 .el-menu--collapse .el-sub-menu__icon-arrow {

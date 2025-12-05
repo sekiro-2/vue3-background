@@ -49,7 +49,7 @@ export const constantRoutes = [
       {
         path: '/org/employee',
         name: 'Employee',
-        redirect: '/org/employee/1',
+
         component: () => import('@/views/Home/dashboard/index.vue'),
         meta: { title: '员工管理', icon: 'employee' },
 
