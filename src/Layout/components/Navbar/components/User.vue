@@ -56,7 +56,7 @@ const close = () => {
   height: 100%;
   display: flex;
   align-items: center;
-  margin-right: 50px;
+  margin: 0 12px;
   cursor: pointer;
   .avatar {
     width: 30px;
@@ -70,6 +70,7 @@ const close = () => {
   }
   .name {
     .el-dropdown {
+      z-index: 1;
       margin-top: 3px;
     }
   }

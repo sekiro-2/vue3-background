@@ -3,6 +3,7 @@ import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Toggle from './components/Toggle.vue'
 import User from './components/User.vue'
 import Fullscreen from '@/components/Fullscreen/index.vue'
+import Setting from './components/Setting.vue'
 </script>
 
 <template>
@@ -17,6 +18,8 @@ import Fullscreen from '@/components/Fullscreen/index.vue'
     <div class="navbar__right">
       <!-- 全屏 -->
       <Fullscreen></Fullscreen>
+      <!-- 系统设置 -->
+      <Setting></Setting>
       <!-- 用户中心 -->
       <User></User>
     </div>
@@ -36,9 +39,7 @@ import Fullscreen from '@/components/Fullscreen/index.vue'
     display: flex;
     align-items: center;
     justify-content: center;
-    .fullscreen {
-      margin-right: 8px;
-    }
+    margin-right: 40px;
   }
 }
 </style>

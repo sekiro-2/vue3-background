@@ -11,6 +11,7 @@ const { isFullscreen, toggle } = useFullscreen()
 
 <style lang="scss" scoped>
 .fullscreen {
-  margin-right: 8px;
+  cursor: pointer;
+  margin: 0 12px;
 }
 </style>

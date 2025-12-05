@@ -23,6 +23,7 @@ const props = defineProps({
   height: 50px;
   background-color: #064696;
   transition: all 0.3s;
+
   a {
     display: flex;
     height: 50px;
