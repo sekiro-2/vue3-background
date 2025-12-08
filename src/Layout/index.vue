@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import Sidebar from '@/Layout/components/Sidebar/index.vue'
 import Navbar from '@/Layout/components/Navbar/index.vue'
+import TagsView from '@/Layout/components/TagsView/index.vue'
 import { useAppStore } from '@/stores'
 const appStore = useAppStore()
 const toggle = computed(() => appStore.sideBarStare)
@@ -16,10 +17,9 @@ const toggle = computed(() => appStore.sideBarStare)
     >
       <Sidebar></Sidebar>
     </aside>
-
     <div class="layout_container">
       <header class="layout_header"><Navbar></Navbar></header>
-      <nav class="layout_nav">标签区域</nav>
+      <nav class="layout_nav" v-if="appStore.tagsViewShow"><TagsView></TagsView></nav>
       <main class="layout_main">
         <router-view></router-view>
       </main>
@@ -27,7 +27,7 @@ const toggle = computed(() => appStore.sideBarStare)
   </div>
 </template>
 <style scoped lang="scss">
-$aisdeWidth: 210px;
+$aisdeWidth: 280px;
 .collapse {
   width: 63px !important;
 }
@@ -49,7 +49,7 @@ $aisdeWidth: 210px;
       border-bottom: 1px solid #e5e5e5;
     }
     .layout_nav {
-      height: 30px;
+      height: 40px;
       border: 1px solid #e5e5e5;
     }
     .layout_main {

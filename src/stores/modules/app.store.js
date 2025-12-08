@@ -14,6 +14,7 @@ export const useAppStore = defineStore('appStore', () => {
   const themeTextColor = ref('#000')
   const themeIndex = ref('1')
   const logoShow = ref(true)
+  const tagsViewShow = ref(true)
   const changeThemeColor = (theme) => {
     themeBackgroundColor.value = theme.backgroudColor,
       themeTextColor.value = theme.textColor,
@@ -27,7 +28,7 @@ export const useAppStore = defineStore('appStore', () => {
     themeBackgroundColor,
     themeTextColor,
     themeIndex,
-    logoShow,
+    logoShow, tagsViewShow,
     toggleSideBar,
     changeThemeColor
   }

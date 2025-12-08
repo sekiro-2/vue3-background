@@ -30,7 +30,8 @@ export const constantRoutes = [
         name: 'Dashboard',
         meta: {
           title: '首页',
-          icon: 'WorkIcon'
+          icon: 'WorkIcon',
+          affix: true
         },
         component: () => import('@/views/Home/dashboard/index.vue')
       }
@@ -50,26 +51,26 @@ export const constantRoutes = [
         path: '/org/employee',
         name: 'Employee',
 
-        component: () => import('@/views/Home/dashboard/index.vue'),
+        component: () => import('@/views/Home/org/employ.vue'),
         meta: { title: '员工管理', icon: 'employee' },
 
       },
       {
         path: '/org/dept',
         name: 'Dept',
-        // component: () => import('@/views/org/dept.vue'),
+        component: () => import('@/views/Home/org/dept.vue'),
         meta: { title: '部门管理', icon: 'department' }
       },
       {
         path: '/org/post',
         name: 'Post',
-        // component: () => import('@/views/org/post.vue'),
+        component: () => import('@/views/Home/org/post.vue'),
         meta: { title: '岗位管理', icon: 'position' },
       },
       {
         path: '/org/role',
         name: 'Role',
-        // component: () => import('@/views/org/role.vue'),
+        component: () => import('@/views/Home/org/role.vue'),
         meta: { title: '角色与权限', icon: 'permission' }
       }
     ]

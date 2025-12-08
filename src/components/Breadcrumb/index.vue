@@ -14,7 +14,6 @@ watch(
   () => route.path,
   () => {
     getBreadcrumb()
-    console.log(breadcrumbs.value)
   },
   {
     immediate: true,
