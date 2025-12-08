@@ -6,6 +6,13 @@ export const useAppStore = defineStore('appStore', () => {
   const sideBarStare = ref(false)
   // 用户名字
   const userName = ref('张三')
+  const openSideBar = () => {
+    sideBarStare.value = false
+  }
+  const closeSideBar = () => {
+    sideBarStare.value = true
+  }
+
   const toggleSideBar = () => {
     sideBarStare.value = !sideBarStare.value
   }
@@ -15,6 +22,7 @@ export const useAppStore = defineStore('appStore', () => {
   const themeIndex = ref('1')
   const logoShow = ref(true)
   const tagsViewShow = ref(true)
+  const menuShow = ref(false)
   const changeThemeColor = (theme) => {
     themeBackgroundColor.value = theme.backgroudColor,
       themeTextColor.value = theme.textColor,
@@ -28,7 +36,8 @@ export const useAppStore = defineStore('appStore', () => {
     themeBackgroundColor,
     themeTextColor,
     themeIndex,
-    logoShow, tagsViewShow,
+    logoShow, tagsViewShow, menuShow, closeSideBar,
+    openSideBar,
     toggleSideBar,
     changeThemeColor
   }

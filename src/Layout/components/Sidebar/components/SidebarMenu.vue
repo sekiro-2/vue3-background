@@ -11,7 +11,7 @@ const props = defineProps({
   <el-menu
     :default-active="$route.path"
     :collapse="props.toggle"
-    :unique-opened="false"
+    :unique-opened="useAppStore().menuShow"
     :collapse-transition="false"
     :background-color="useAppStore().themeBackgroundColor"
     :text-color="useAppStore().themeTextColor"

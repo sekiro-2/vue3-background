@@ -53,19 +53,21 @@ watch(
 </script>
 <template>
   <div class="tags">
-    <router-link
-      v-for="tag in tags"
-      :to="tag.fullPath"
-      :key="tag.fullPath"
-      :class="['tagview', { isactive: tag.fullPath === route.fullPath }]"
-    >
-      {{ tag.title }}
-      <div
-        v-if="!tag?.affix"
-        class="i-svg:delete delete-icon"
-        @click.prevent.stop="deleteTagView(tag)"
-      ></div>
-    </router-link>
+    <keep-alive>
+      <router-link
+        v-for="tag in tags"
+        :to="tag.fullPath"
+        :key="tag.fullPath"
+        :class="['tagview', { isactive: tag.fullPath === route.fullPath }]"
+      >
+        {{ tag.title }}
+        <div
+          v-if="!tag?.affix"
+          class="i-svg:delete delete-icon"
+          @click.prevent.stop="deleteTagView(tag)"
+        ></div>
+      </router-link>
+    </keep-alive>
   </div>
 </template>
 

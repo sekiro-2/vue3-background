@@ -1,11 +1,22 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
 import Sidebar from '@/Layout/components/Sidebar/index.vue'
 import Navbar from '@/Layout/components/Navbar/index.vue'
 import TagsView from '@/Layout/components/TagsView/index.vue'
 import { useAppStore } from '@/stores'
+import { useWindowSize } from '@vueuse/core'
 const appStore = useAppStore()
 const toggle = computed(() => appStore.sideBarStare)
+const width = useWindowSize().width
+// 监听窗口宽度变化，调整设备类型和侧边栏状态
+watchEffect(() => {
+  const isDesktop = width.value >= 992
+  if (isDesktop) {
+    appStore.openSideBar()
+  } else {
+    appStore.closeSideBar()
+  }
+})
 </script>
 
 <template>
@@ -20,6 +31,7 @@ const toggle = computed(() => appStore.sideBarStare)
     <div class="layout_container">
       <header class="layout_header"><Navbar></Navbar></header>
       <nav class="layout_nav" v-if="appStore.tagsViewShow"><TagsView></TagsView></nav>
+
       <main class="layout_main">
         <router-view></router-view>
       </main>
@@ -53,9 +65,10 @@ $aisdeWidth: 280px;
       border: 1px solid #e5e5e5;
     }
     .layout_main {
-      height: calc(100vh - 80px);
+      height: calc(100vh - 90px);
       padding: 20px;
       background: #f2f3f5;
+      overflow: auto;
     }
   }
 }
