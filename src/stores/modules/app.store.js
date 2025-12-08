@@ -10,16 +10,24 @@ export const useAppStore = defineStore('appStore', () => {
     sideBarStare.value = !sideBarStare.value
   }
   // 系统侧边栏颜色
-  const themeColor = ref('#fff')
-  const changeThemeColor = (color) => {
-    themeColor.value = color
+  const themeBackgroundColor = ref('#fff')
+  const themeTextColor = ref('#000')
+  const themeIndex = ref('1')
+  const logoShow = ref(true)
+  const changeThemeColor = (theme) => {
+    themeBackgroundColor.value = theme.backgroudColor,
+      themeTextColor.value = theme.textColor,
+      themeIndex.value = theme.index
   }
 
 
   return {
     sideBarStare,
     userName,
-    themeColor,
+    themeBackgroundColor,
+    themeTextColor,
+    themeIndex,
+    logoShow,
     toggleSideBar,
     changeThemeColor
   }

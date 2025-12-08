@@ -7,7 +7,7 @@ const routerStore = useRouterStore()
 </script>
 
 <template>
-  <SidebarLogo :toggle="appStore.sideBarStare"></SidebarLogo>
+  <SidebarLogo :toggle="appStore.sideBarStare" v-if="appStore.logoShow"></SidebarLogo>
   <el-scrollbar>
     <SidebarMenu :data="routerStore.router" :toggle="appStore.sideBarStare"></SidebarMenu>
   </el-scrollbar>

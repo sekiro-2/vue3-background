@@ -4,7 +4,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <div class="logo" :class="{ collapse: toggle }">
+  <div class="logo">
     <transition enter-active-class="animate__animated animate__fadeInLeft">
       <router-link :key="+toggle" to="/dashboard">
         <img src="@/assets/logo.png" alt="" />

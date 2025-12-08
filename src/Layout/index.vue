@@ -9,7 +9,11 @@ const toggle = computed(() => appStore.sideBarStare)
 
 <template>
   <div class="layout">
-    <aside class="layout_aside" :class="{ collapse: toggle }">
+    <aside
+      class="layout_aside"
+      :class="{ collapse: toggle }"
+      :style="{ background: appStore.themeBackgroundColor }"
+    >
       <Sidebar></Sidebar>
     </aside>
 

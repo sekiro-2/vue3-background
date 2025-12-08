@@ -13,8 +13,8 @@ const props = defineProps({
     :collapse="props.toggle"
     :unique-opened="false"
     :collapse-transition="false"
-    :background-color="useAppStore().themeColor"
-    text-color="#fff"
+    :background-color="useAppStore().themeBackgroundColor"
+    :text-color="useAppStore().themeTextColor"
     router
   >
     <SidebarMenuItem
