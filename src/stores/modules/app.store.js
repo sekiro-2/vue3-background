@@ -18,11 +18,18 @@ export const useAppStore = defineStore('appStore', () => {
   }
   // 系统侧边栏颜色
   const themeBackgroundColor = ref('#fff')
+  // 系统侧边栏文字颜色
   const themeTextColor = ref('#000')
+
   const themeIndex = ref('1')
+  // logo显示
   const logoShow = ref(true)
+  // 标签页面显示
   const tagsViewShow = ref(true)
+  // 菜单展开方式显示
   const menuShow = ref(false)
+
+
   const changeThemeColor = (theme) => {
     themeBackgroundColor.value = theme.backgroudColor,
       themeTextColor.value = theme.textColor,
