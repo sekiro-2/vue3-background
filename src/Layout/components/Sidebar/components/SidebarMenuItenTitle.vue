@@ -20,7 +20,7 @@ const componentIcon = props?.icon?.endsWith('Icon')
     <div :class="`i-svg:element-plus`" class="Svgicon"></div>
   </template>
 </template>
-<style>
+<style scoped>
 .Svgicon,
 .el-icon {
   width: 24px;

@@ -1,14 +1,14 @@
 <script setup>
 import CountUp from 'vue-countup-v3'
-const orgCount = {
-  allPeople: { title: '企业总人数', num: 5222 },
-  formalStaff: { title: '正式员工', num: 4164 },
-  contractPending: { title: '合同待签署', num: 2323 },
-  toJoin: { title: '待入职', num: 252 },
-  toRegularizeThisMonth: { title: '本月待转正', num: 112 },
-  toResignThisMonth: { title: '本月待离职', num: 137 },
-}
 
+const orgCount = [
+  { title: '企业总人数', num: 5222 },
+  { title: '正式员工', num: 4164 },
+  { title: '合同待签署', num: 2323 },
+  { title: '待入职', num: 252 },
+  { title: '本月待转正', num: 112 },
+  { title: '本月待离职', num: 137 },
+]
 const quickLink = [
   {
     path: '/org/employee',
@@ -49,11 +49,11 @@ const quickLink = [
           />
         </div>
         <div class="icon-box primary-bg">
-          <i class="fa fa-briefcase"></i>
+          <div :class="[`i-svg:dog${index + 1}`, 'text-50px']"></div>
         </div>
       </div>
       <div class="card-footer success">
-        <span>8.2% 较上月</span>
+        <span>较上月上升8.2% </span>
       </div>
     </div>
 
@@ -147,7 +147,7 @@ const quickLink = [
   .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 16px;
 
     .card-title-small {

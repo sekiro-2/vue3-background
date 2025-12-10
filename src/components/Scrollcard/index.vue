@@ -111,7 +111,7 @@ const resume = () => {
 onMounted(async () => {
   await nextTick()
   height = wrapper.value.scrollHeight / 3 // 单份高度
-  console.log(height)
+
   animate()
 })
 

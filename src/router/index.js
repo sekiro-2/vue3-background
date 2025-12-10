@@ -51,14 +51,14 @@ export const constantRoutes = [
         path: '/org/employee',
         name: 'Employee',
 
-        component: () => import('@/views/Home/org/employ.vue'),
+        component: () => import('@/views/Home/org/employ/employ.vue'),
         meta: { title: '员工管理', icon: 'employee' },
 
       },
       {
         path: '/org/dept',
         name: 'Dept',
-        component: () => import('@/views/Home/org/dept.vue'),
+        component: () => import('@/views/Home/org/dept/dept.vue'),
         meta: { title: '部门管理', icon: 'department' }
       },
       {

@@ -5,7 +5,7 @@ import Myechart from '@/components/Myechart/index.vue'
 import { getTodayDate } from '@/utils'
 import CardItem from './components/CardItem.vue'
 import * as echarts from 'echarts'
-import { lineOption, pieOption, treeOption } from '@/utils/index'
+import { lineOption, pieOption, treeOption, radarOption } from '@/utils/index'
 const date = getTodayDate()
 </script>
 
@@ -24,13 +24,14 @@ const date = getTodayDate()
     <!-- 右侧 Todo 区 -->
     <div class="right">
       <h3 class="mb-[20px]">通知公告</h3>
-      <Scrollcard :notices="announcements" :speed="10" />
+      <Scrollcard :notices="announcements" :speed="5" />
     </div>
   </div>
   <div class="show">
-    <div class="chart"><Myechart :option="lineOption"></Myechart></div>
     <div class="chart"><Myechart :option="pieOption"></Myechart></div>
     <div class="chart"><Myechart :option="treeOption"></Myechart></div>
+    <div class="chart"><Myechart :option="lineOption"></Myechart></div>
+    <div class="chart"><Myechart :option="radarOption"></Myechart></div>
   </div>
 </template>
 
