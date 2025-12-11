@@ -39,7 +39,7 @@ watchEffect(() => {
   </div>
 </template>
 <style scoped lang="scss">
-$aisdeWidth: 280px;
+$aisdeWidth: 220px;
 .collapse {
   width: 63px !important;
 }
@@ -48,11 +48,13 @@ $aisdeWidth: 280px;
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: start;
   .layout_aside {
     height: 100vh;
     width: $aisdeWidth;
     background: #fff;
     transition: width 0.3s;
+    flex-shrink: 0; /* ✅ 核心 */
   }
   .layout_container {
     width: 100%;
