@@ -54,6 +54,7 @@ Mock.mock('/api/employees/edit', 'post', (options) => {
   const index = deptTableData.findIndex(emp => emp.id === body.id);
   if (index > -1) {
     deptTableData[index] = { ...deptTableData[index], ...body };
+    saveData()
     return { code: 200, message: '修改成功', data: deptTableData[index] };
   } else {
     return { code: 404, message: '员工不存在' };

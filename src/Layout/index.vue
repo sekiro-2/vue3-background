@@ -30,7 +30,9 @@ watchEffect(() => {
     </aside>
     <div class="layout_container">
       <header class="layout_header"><Navbar></Navbar></header>
-      <nav class="layout_nav" v-if="appStore.tagsViewShow"><TagsView></TagsView></nav>
+      <nav class="layout_nav" v-if="appStore.tagsViewShow">
+        <TagsView></TagsView>
+      </nav>
 
       <main class="layout_main">
         <router-view></router-view>

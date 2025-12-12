@@ -17,8 +17,9 @@ const getEmployList = async () => {
   deptTableData.value = res.data
   loading.value = false
 }
+// 选择框导出的数据
 const handleSelectionChange = (rows) => {
-  // console.log('已选择的行：', rows)
+  console.log('已选择的行：', rows)
 }
 // 控制哪一行的删除弹窗显示
 const popoverIndex = ref(-1)
@@ -78,23 +79,50 @@ onMounted(() => {
           <div>{{ scope.row.email }}</div>
         </template>
       </el-table-column>
-      <el-table-column prop="status" label="状态"> </el-table-column>
+      <el-table-column prop="status" label="状态">
+        <template #default="scope">
+          <span
+            :class="[
+              'px-2 py-1 rounded text-white',
+              scope.row.status === '在职'
+                ? 'bg-green-500'
+                : scope.row.status === '离职'
+                  ? 'bg-red-500'
+                  : scope.row.status === '休假'
+                    ? 'bg-yellow-500 text-black'
+                    : scope.row.status === '试用期'
+                      ? 'bg-blue-500'
+                      : 'bg-gray-500',
+            ]"
+          >
+            {{ scope.row.status }}
+          </span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button type="primary" :icon="Edit" circle @click="openShowMask(scope.row)" />
-          <el-popover :visible="popoverIndex === scope.$index" placement="top" :width="180">
-            <p>你确认要删除吗？</p>
-            <div style="text-align: right; margin: 0">
-              <el-button size="small" text @click="popoverIndex = -1">取消</el-button>
-              <el-button size="small" type="primary" @click="handleDelete(scope.row)">
-                确认
-              </el-button>
-            </div>
-            <template #reference>
-              <el-button type="danger" :icon="Delete" circle @click="popoverIndex = scope.$index" />
-            </template>
-          </el-popover> </template
-      ></el-table-column>
+          <div style="width: 76px">
+            <el-button type="primary" :icon="Edit" circle @click="openShowMask(scope.row)" />
+            <el-popover :visible="popoverIndex === scope.$index" placement="top" :width="180">
+              <p>你确认要删除吗？</p>
+              <div style="text-align: right; margin: 0">
+                <el-button size="small" text @click="popoverIndex = -1">取消</el-button>
+                <el-button size="small" type="primary" @click="handleDelete(scope.row)">
+                  确认
+                </el-button>
+              </div>
+              <template #reference>
+                <el-button
+                  type="danger"
+                  :icon="Delete"
+                  circle
+                  @click="popoverIndex = scope.$index"
+                />
+              </template>
+            </el-popover>
+          </div>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 
@@ -109,7 +137,7 @@ onMounted(() => {
 <style scoped lang="scss">
 $cardBgc: #fff;
 .deptmain {
-  width: 1600px;
+  width: 100%;
   border-radius: 16px;
   padding: 20px;
   background-color: $cardBgc;

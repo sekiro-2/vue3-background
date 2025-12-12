@@ -28,10 +28,10 @@ const date = getTodayDate()
     </div>
   </div>
   <div class="show">
-    <div class="chart"><Myechart :option="pieOption"></Myechart></div>
-    <div class="chart"><Myechart :option="treeOption"></Myechart></div>
-    <div class="chart"><Myechart :option="lineOption"></Myechart></div>
-    <div class="chart"><Myechart :option="radarOption"></Myechart></div>
+    <div class="charts"><Myechart :option="radarOption"></Myechart></div>
+    <div class="charts"><Myechart :option="pieOption"></Myechart></div>
+    <div class="charts"><Myechart :option="treeOption"></Myechart></div>
+    <div class="charts"><Myechart :option="lineOption"></Myechart></div>
   </div>
 </template>
 
@@ -43,9 +43,11 @@ const date = getTodayDate()
   @media (max-width: 1224px) {
     grid-template-columns: 1fr;
   }
-  .chart {
+  .charts {
+    border-radius: 20px;
     background: #fff;
     height: 500px;
+    min-width: 0;
   }
 }
 

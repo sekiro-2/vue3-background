@@ -52,23 +52,25 @@ watch(
 // })
 </script>
 <template>
-  <div class="tags">
-    <keep-alive>
-      <router-link
-        v-for="tag in tags"
-        :to="tag.fullPath"
-        :key="tag.fullPath"
-        :class="['tagview', { isactive: tag.fullPath === route.fullPath }]"
-      >
-        {{ tag.title }}
-        <div
-          v-if="!tag?.affix"
-          class="i-svg:delete delete-icon"
-          @click.prevent.stop="deleteTagView(tag)"
-        ></div>
-      </router-link>
-    </keep-alive>
-  </div>
+  <el-scrollbar>
+    <div class="tags">
+      <keep-alive>
+        <router-link
+          v-for="tag in tags"
+          :to="tag.fullPath"
+          :key="tag.fullPath"
+          :class="['tagview', { isactive: tag.fullPath === route.fullPath }]"
+        >
+          {{ tag.title }}
+          <div
+            v-if="!tag?.affix"
+            class="i-svg:delete delete-icon"
+            @click.prevent.stop="deleteTagView(tag)"
+          ></div>
+        </router-link>
+      </keep-alive>
+    </div>
+  </el-scrollbar>
 </template>
 
 <style scoped lang="scss">
@@ -79,10 +81,13 @@ watch(
 
 .tags {
   display: flex;
+  width: fit-content;
   height: 100%;
   align-items: center;
   margin-left: 10px;
+  margin-top: 3px;
   .tagview {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -102,5 +107,8 @@ watch(
       transform: scale(0.8);
     }
   }
+}
+::deep(.el-scrollbar__view) {
+  height: 40px !important;
 }
 </style>

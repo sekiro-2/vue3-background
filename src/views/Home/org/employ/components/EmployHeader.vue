@@ -2,11 +2,13 @@
 import { ref } from 'vue'
 import { Download, Plus, Upload } from '@element-plus/icons-vue'
 import { deptStaffOptions, statusStaffOptions, positionOptions } from '@/utils/index'
+import { exportExcel } from '@/utils'
 import Editemploy from './Editemploy.vue'
 import ShowMaskItem from './ShowMaskItem.vue'
 const deptSort = ref('all')
 const statusSort = ref('all')
 const positionSort = ref('all')
+// 添加后告诉employFrom组件更新
 const emit = defineEmits(['to-form'])
 // 编辑蒙层
 const showMask = ref(false)
@@ -20,6 +22,9 @@ const handleOk = () => {
   emit('to-form')
   closeShowMask()
 }
+// const handleExport = () => {
+//   exportExcel(tableData.value, '员工数据')
+// }
 </script>
 <template>
   <div class="deptheader block">
@@ -27,11 +32,11 @@ const handleOk = () => {
       <el-button type="primary" class="button" @click="openShowMask">
         <el-icon><Plus /></el-icon>添加员工</el-button
       >
-      <el-button class="button">
-        <el-icon><Upload /></el-icon>批量导入</el-button
+      <el-button class="button" @click="handleExport">
+        <el-icon><Upload /></el-icon>导出数据</el-button
       >
       <el-button class="button">
-        <el-icon><Download /></el-icon>导出数据</el-button
+        <el-icon><Download /></el-icon>批量导入</el-button
       >
     </div>
     <div class="sortstaff">
@@ -83,8 +88,10 @@ $cardBgc: #fff;
   border-radius: 16px;
   background-color: $cardBgc;
   .addstaff {
+    display: flex;
     .button {
       height: 40px;
+      width: 100%;
     }
   }
   .sortstaff {

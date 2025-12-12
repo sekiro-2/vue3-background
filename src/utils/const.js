@@ -110,10 +110,7 @@ export const treeOption = {
     text: '公司组织架构',
     left: '20px',
     top: '20px',
-    textStyle: {
-      color: '#235894',
-      fontSize: 24,
-    },
+    textStyle: { color: '#235894', fontSize: 24, fontWeight: 'bold' },
   },
   tooltip: {
     trigger: 'item',
@@ -122,32 +119,79 @@ export const treeOption = {
   },
   series: [
     {
+
       type: 'tree',
       data: [
         {
           name: '公司',
           children: [
             {
-              name: '技术部',
-              children: [{ name: '前端组' }, { name: '后端组' }],
+              name: '人力资源部',
+              children: [
+                { name: 'HR专员' },
+              ],
+            },
+            {
+              name: '行政部',
+              children: [
+                { name: '行政助理' },
+              ],
+            },
+            {
+              name: '财务部',
+              children: [
+                { name: '财务专员' },
+              ],
+            },
+            {
+              name: '市场部',
+              children: [
+                { name: '市场专员' },
+              ],
+            },
+            {
+              name: '销售部',
+              children: [
+                { name: '销售代表' },
+              ],
+            },
+            {
+              name: '研发部',
+              children: [
+                { name: '前端开发工程师' },
+                { name: '后端开发工程师' },
+                { name: '测试工程师' },
+              ],
             },
             {
               name: '产品部',
-              children: [{ name: '产品经理组' }, { name: '设计组' }],
+              children: [
+                { name: '产品经理' },
+                { name: 'UI/UX 设计师' },
+              ],
+            },
+            {
+              name: '技术支持部',
+              children: [
+                { name: '技术支持工程师' },
+                { name: '运维工程师' },
+              ],
             },
             {
               name: '运营部',
-              children: [{ name: '市场组' }, { name: '客服组' }],
+              children: [
+                { name: '运营专员' },
+              ],
             },
           ],
         },
       ],
-      top: '10%',
+
       left: '10%',
       bottom: '10%',
-      right: '10%',
+      right: '20%',
       symbol: 'circle',
-      symbolSize: 10,
+      symbolSize: 12,
       label: {
         position: 'left',
         verticalAlign: 'middle',
@@ -160,6 +204,8 @@ export const treeOption = {
           position: 'right',
           verticalAlign: 'middle',
           align: 'left',
+          fontSize: 12,
+          color: '#555',
         },
       },
       expandAndCollapse: true, // 可折叠
@@ -248,12 +294,6 @@ export const deptStaffOptions = [
   { label: '运营部', value: '运营部' },
 ]
 
-export const statusStaffOptions = [
-  { label: '在职', value: '在职' },
-  { label: '试用期', value: '试用期' },
-  { label: '休假', value: '休假' },
-  { label: '离职', value: '离职' },
-]
 
 export const positionOptions = [
   { label: '前端开发工程师', value: '前端开发工程师' },
@@ -272,4 +312,10 @@ export const positionOptions = [
 ]
 
 
+export const statusStaffOptions = [
+  { label: '在职', value: '在职' },
+  { label: '试用期', value: '试用期' },
+  { label: '休假', value: '休假' },
+  { label: '离职', value: '离职' },
+]
 
