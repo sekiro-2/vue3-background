@@ -77,6 +77,8 @@ const addEmployList = async () => {
 const editEmployList = async () => {
   console.log(form)
   await editEmployListAPI(form)
+  messageInfo('编辑成功', 'success')
+
   emit('finish')
 }
 </script>

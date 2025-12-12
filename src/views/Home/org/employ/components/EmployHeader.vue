@@ -32,7 +32,7 @@ const handleOk = () => {
       <el-button type="primary" class="button" @click="openShowMask">
         <el-icon><Plus /></el-icon>添加员工</el-button
       >
-      <el-button class="button" @click="handleExport">
+      <el-button class="button">
         <el-icon><Upload /></el-icon>导出数据</el-button
       >
       <el-button class="button">
@@ -48,7 +48,7 @@ const handleOk = () => {
           :value="item.value"
         />
       </el-select>
-      <el-select v-model="positionSort" class="select">
+      <el-select v-model="statusSort" class="select">
         <el-option
           v-for="item in [{ label: '所有状态', value: 'all' }, ...statusStaffOptions]"
           :key="item.value"
@@ -56,7 +56,7 @@ const handleOk = () => {
           :value="item.value"
         />
       </el-select>
-      <el-select v-model="statusSort" class="select">
+      <el-select v-model="positionSort" class="select">
         <el-option
           v-for="item in [{ label: '全部职位', value: 'all' }, ...positionOptions]"
           :key="item.value"

@@ -94,7 +94,7 @@ watch(
     padding: 5px 8px;
     border: 1px solid #ccc;
     font-size: 14px;
-    color: #000;
+    color: #333;
     border-radius: 2px;
     margin: 0 5px;
     cursor: pointer;
@@ -102,7 +102,6 @@ watch(
 
   .delete-icon {
     font-size: 12px;
-    color: red;
     &:hover {
       transform: scale(0.8);
     }

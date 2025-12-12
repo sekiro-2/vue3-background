@@ -5,7 +5,6 @@ export function getEmployListAPI() {
     url: '/employees',
     method: 'get',
   })
-
 }
 
 

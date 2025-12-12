@@ -6,7 +6,7 @@ import '@/styles/index.scss'
 import 'element-plus/dist/index.css'
 import 'animate.css';
 import 'uno.css'
-import('./mock/employTable');
+import './mock'
 
 
 const app = createApp(App)
