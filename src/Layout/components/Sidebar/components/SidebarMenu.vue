@@ -15,6 +15,7 @@ const props = defineProps({
     :collapse-transition="false"
     :background-color="useAppStore().themeBackgroundColor"
     :text-color="useAppStore().themeTextColor"
+    :active-text-color="useAppStore().tagsViewBgc"
     router
   >
     <SidebarMenuItem

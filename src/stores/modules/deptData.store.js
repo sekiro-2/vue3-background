@@ -1,8 +1,8 @@
 import { useStorage } from '@vueuse/core'
 import { defineStore } from "pinia";
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { getDeptListAPI, deleteDeptListAPI, editDeptListAPI, addDeptListAPI } from '@/apis/dept'
-
+import { listToTree } from '@/utils/createTree';
 export const usedeptDataStore = defineStore('deptDataStore', () => {
   const deptList = ref([])
   // 开关编辑，添加框
@@ -23,9 +23,6 @@ export const usedeptDataStore = defineStore('deptDataStore', () => {
     const res = await getDeptListAPI()
 
     deptList.value = res.data
-
-
-
   }
   async function deleteDeptList(code) {
     const res = await deleteDeptListAPI(code)
@@ -39,19 +36,23 @@ export const usedeptDataStore = defineStore('deptDataStore', () => {
     const res = await addDeptListAPI(form)
     deptList.value = res.data
   }
-  // watch(
-  //   () => this.deptList,
-  //   () => {
-  //     console.trace('deptList 被修改')
-  //   },
-  //   { deep: true }
-  // )
+  const treeData = computed(() => {
+    return listToTree(deptList.value) || []
+  })
+
   return {
     deptList,
-    getDeptList,
+
+    showDeptMosk,
     showMoskType,
     editData,
-    deleteDeptList, showDeptMosk, openShowMask, closeShowMask, editDeptList, addDeptList
+    treeData,
+    getDeptList,
+    deleteDeptList,
+    openShowMask,
+    closeShowMask,
+    editDeptList,
+    addDeptList
   }
 }
 )

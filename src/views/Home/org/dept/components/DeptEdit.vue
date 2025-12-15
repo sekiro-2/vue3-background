@@ -1,9 +1,11 @@
 <script setup>
-import { reactive, watch, ref } from 'vue'
+import { reactive, watch, ref, computed } from 'vue'
 import { CloseBold, Phone } from '@element-plus/icons-vue'
 import { deptStaffOptions, statusDeptOptions, positionOptions, messageInfo } from '@/utils'
 import { addEmployListAPI, editEmployListAPI } from '@/apis/employ'
 import { usedeptDataStore } from '@/stores/modules/deptData.store'
+import { storeToRefs } from 'pinia'
+
 const deptDataStore = usedeptDataStore()
 const props = defineProps({
   showMask: Boolean,
@@ -61,22 +63,24 @@ const closeShowMask = () => {
   formRef.value?.clearValidate()
 }
 const option = ref([])
+const { treeData } = storeToRefs(deptDataStore)
 watch(
-  () => form.dept,
-  (newData) => {
-    if (newData.slice(-1) === '部') {
+  [() => form.dept, treeData],
+  ([newDept]) => {
+    if (!newDept) return
+    if (newDept.endsWith('部')) {
       form.parentDept = '公司'
       option.value = [{ label: '公司', value: '公司' }]
     } else {
-      if (newData.slice(-1) !== '组') {
+      if (!newDept.endsWith('组')) {
         form.parentDept = ''
       }
-
-      option.value = deptStaffOptions
+      option.value = treeData.value?.[0]?.children ?? []
     }
   },
-  { immediate: true }, // 组件初始化时也执行一次
+  { immediate: true },
 )
+
 watch(
   () => props.data,
   (newData) => {

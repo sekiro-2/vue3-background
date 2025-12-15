@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import ThemeAside from '@/components/SettingItem/themeAside.vue'
 import OtherSetting from '@/components/SettingItem/otherSetting.vue'
+import Themcolor from '@/components/SettingItem/themcolor.vue'
 
 const toggle = ref(false)
 const showMask = () => {
@@ -17,6 +18,7 @@ const showMask = () => {
       <h3 class="title">系统设置</h3>
       <div class="theme-box">
         <ThemeAside></ThemeAside>
+        <Themcolor></Themcolor>
         <OtherSetting></OtherSetting>
       </div>
     </div>

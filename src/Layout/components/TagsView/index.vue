@@ -1,11 +1,13 @@
 <script setup>
 import { computed, KeepAlive, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useTagsViewStore, useRouterStore } from '@/stores'
+import { useTagsViewStore, useRouterStore, useAppStore } from '@/stores'
 import router from '@/router'
 const route = useRoute()
 const routerStore = useRouterStore()
 const tagsViewStore = useTagsViewStore()
+const appStore = useAppStore()
+
 const tags = computed(() => tagsViewStore.tagsView)
 const addTags = () => {
   tagsViewStore.addView({
@@ -57,7 +59,7 @@ watch(
 
 <style scoped lang="scss">
 .isactive {
-  background-color: #409eff;
+  background-color: v-bind('appStore.tagsViewBgc');
   color: #fff !important;
 }
 

@@ -28,8 +28,11 @@ export const useAppStore = defineStore('appStore', () => {
   const tagsViewShow = ref(true)
   // 菜单展开方式显示
   const menuShow = ref(false)
-
-
+  // tagsvews的背景色
+  const tagsViewBgc = ref('#409eff')
+  const changeTagsViewBgc = (color) => {
+    tagsViewBgc.value = color
+  }
   const changeThemeColor = (theme) => {
     themeBackgroundColor.value = theme.backgroudColor,
       themeTextColor.value = theme.textColor,
@@ -43,9 +46,14 @@ export const useAppStore = defineStore('appStore', () => {
     themeBackgroundColor,
     themeTextColor,
     themeIndex,
-    logoShow, tagsViewShow, menuShow, closeSideBar,
+    logoShow,
+    tagsViewShow,
+    menuShow,
+    tagsViewBgc,
+    closeSideBar,
     openSideBar,
     toggleSideBar,
+    changeTagsViewBgc,
     changeThemeColor
   }
 

@@ -281,10 +281,11 @@ export const radarOption = {
   ]
 }
 
+
 // 员工筛选数据
 export const deptStaffOptions = [
-  { label: '人力资源部', value: '人力资源部' },
-  { label: '行政部', value: '行政部' },
+  { label: '人力资源部', value: '人力资源部', children: [] },
+  { label: '行政人事部', value: '行政人事部' },
   { label: '财务部', value: '财务部' },
   { label: '市场部', value: '市场部' },
   { label: '销售部', value: '销售部' },
