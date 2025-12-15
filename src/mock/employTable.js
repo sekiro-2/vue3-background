@@ -40,7 +40,7 @@ Mock.mock('/api/employees/add', 'post', (options) => {
 
   // 添加到数组
   employTableData.unshift(newEmployee)
-  saveData()  // 保存到 localStorage
+  saveData()
   return {
     code: 200,
     msg: '添加成功',

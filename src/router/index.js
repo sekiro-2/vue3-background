@@ -31,7 +31,8 @@ export const constantRoutes = [
         meta: {
           title: '首页',
           icon: 'WorkIcon',
-          affix: true
+          affix: true,
+          keepAlive: true
         },
         component: () => import('@/views/Home/dashboard/index.vue')
       }
@@ -52,13 +53,12 @@ export const constantRoutes = [
         path: '/org/dept',
         name: 'Dept',
         component: () => import('@/views/Home/org/dept/dept.vue'),
-        meta: { title: '部门管理', icon: 'department' }
+        meta: { title: '部门管理', icon: 'department', keepAlive: true }
       }, {
         path: '/org/employee',
         name: 'Employee',
-
         component: () => import('@/views/Home/org/employ/employ.vue'),
-        meta: { title: '员工管理', icon: 'employee' },
+        meta: { title: '员工管理', icon: 'employee', keepAlive: true },
 
       },
       {

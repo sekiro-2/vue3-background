@@ -1,15 +1,13 @@
 <script setup>
 import { usedeptDataStore } from '@/stores/modules/deptData.store'
-import { watch, watchEffect } from 'vue'
+import { watch, watchEffect, computed, ref } from 'vue'
 const deptDataStore = usedeptDataStore()
-console.log(typeof deptDataStore.deptList)
-// watch(
-//   () => deptDataStore.deptList,
-//   (val) => {
-//     console.log('deptList 更新了：', val)
-//   },
-//   { immediate: true },
-// )
+
+watch(
+  () => deptDataStore.deptList,
+  (val) => {},
+  { immediate: true },
+)
 const data = [
   {
     label: '公司总部',
@@ -91,8 +89,15 @@ function listToTree(list) {
 
   return tree
 }
-const a = listToTree(deptDataStore.deptList)
-console.log(a)
+const treeData = ref([])
+watch(
+  () => deptDataStore.deptList,
+  (val) => {
+    treeData.value = listToTree(val)
+    // console.log(treeData.value)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>

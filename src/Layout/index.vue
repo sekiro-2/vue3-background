@@ -5,6 +5,9 @@ import Navbar from '@/Layout/components/Navbar/index.vue'
 import TagsView from '@/Layout/components/TagsView/index.vue'
 import { useAppStore } from '@/stores'
 import { useWindowSize } from '@vueuse/core'
+import { storeToRefs } from 'pinia'
+import { useTagsViewStore } from '@/stores'
+const { cachedViews } = storeToRefs(useTagsViewStore())
 const appStore = useAppStore()
 const toggle = computed(() => appStore.sideBarStare)
 const width = useWindowSize().width
@@ -17,6 +20,8 @@ watchEffect(() => {
     appStore.closeSideBar()
   }
 })
+
+// ['DeptManage']
 </script>
 
 <template>
@@ -35,7 +40,11 @@ watchEffect(() => {
       </nav>
 
       <main class="layout_main">
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+          <keep-alive :include="cachedViews">
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </main>
     </div>
   </div>

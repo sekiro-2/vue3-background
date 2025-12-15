@@ -7,6 +7,9 @@ import CardItem from './components/CardItem.vue'
 import * as echarts from 'echarts'
 import { lineOption, pieOption, treeOption, radarOption } from '@/utils/index'
 const date = getTodayDate()
+defineOptions({
+  name: 'Dashboard',
+})
 </script>
 
 <template>
@@ -24,7 +27,7 @@ const date = getTodayDate()
     <!-- 右侧 Todo 区 -->
     <div class="right">
       <h3 class="mb-[20px]">通知公告</h3>
-      <Scrollcard :notices="announcements" :speed="5" />
+      <Scrollcard :speed="5" />
     </div>
   </div>
   <div class="show">

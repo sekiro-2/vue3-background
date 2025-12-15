@@ -77,7 +77,7 @@ export function genCode() {
 export const deptData = Array.from({ length: 30 }).map((_, index) => {
   let parentDept = Mock.Random.pick(rootDepartments)
   const dept =
-    Mock.Random.boolean(4, 1)   // 80% 有子部门，20% 无
+    Mock.Random.boolean(4, 1)
       ? Mock.Random.pick(subDepartments[parentDept])
       : parentDept
   const createTime = Mock.Random.date('yyyy-MM-dd')

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, watch } from 'vue'
+import { computed, KeepAlive, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useTagsViewStore, useRouterStore } from '@/stores'
 import router from '@/router'
@@ -9,9 +9,11 @@ const tagsViewStore = useTagsViewStore()
 const tags = computed(() => tagsViewStore.tagsView)
 const addTags = () => {
   tagsViewStore.addView({
+    name: route.name,
     fullPath: route.fullPath,
     title: route.meta.title,
     affix: route.meta?.affix,
+    keepAlive: route.meta?.keepAlive,
   })
 }
 const deleteTagView = (deleteTags) => {
@@ -23,21 +25,6 @@ const deleteTagView = (deleteTags) => {
     router.push(tags.value[tags.value.length - 1].fullPath)
   }
 }
-
-// const findAffixTags = (value) => {
-//   value.forEach((item) => {
-//     if (item?.meta?.affix) {
-//       tagsViewStore.addView({
-//         fullPath: item.path,
-//         title: item.meta.title,
-//       })
-//     }
-//     if (item?.children) {
-//       findAffixTags(item.children)
-//     }
-//   })
-// }
-
 watch(
   route,
   () => {
@@ -47,28 +34,23 @@ watch(
     immediate: true, //初始化立即执行
   },
 )
-// onMounted(() => {
-//   findAffixTags(routerStore.router)
-// })
 </script>
 <template>
   <el-scrollbar>
     <div class="tags">
-      <keep-alive>
-        <router-link
-          v-for="tag in tags"
-          :to="tag.fullPath"
-          :key="tag.fullPath"
-          :class="['tagview', { isactive: tag.fullPath === route.fullPath }]"
-        >
-          {{ tag.title }}
-          <div
-            v-if="!tag?.affix"
-            class="i-svg:delete delete-icon"
-            @click.prevent.stop="deleteTagView(tag)"
-          ></div>
-        </router-link>
-      </keep-alive>
+      <router-link
+        v-for="tag in tags"
+        :to="tag.fullPath"
+        :key="tag.fullPath"
+        :class="['tagview', { isactive: tag.fullPath === route.fullPath }]"
+      >
+        {{ tag.title }}
+        <div
+          v-if="!tag?.affix"
+          class="i-svg:delete delete-icon"
+          @click.prevent.stop="deleteTagView(tag)"
+        ></div>
+      </router-link>
     </div>
   </el-scrollbar>
 </template>

@@ -2,6 +2,9 @@
 import EmployHeader from './components/EmployHeader.vue'
 import EmployFrom from './components/EmployFrom.vue'
 import { ref } from 'vue'
+defineOptions({
+  name: 'Employee',
+})
 const updated = ref(false)
 const updatedForm = () => {
   updated.value = true
