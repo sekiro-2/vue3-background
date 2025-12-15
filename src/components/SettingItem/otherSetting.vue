@@ -26,6 +26,14 @@ const value2 = ref(true)
       />
     </div>
     <div class="block">
+      <span>允许页面标签拖拽</span>
+      <el-switch
+        v-model="appStore.tagsViewMove"
+        class="ml-2"
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+      />
+    </div>
+    <div class="block">
       <span>保持一个菜单展开</span>
       <el-switch
         v-model="appStore.menuShow"

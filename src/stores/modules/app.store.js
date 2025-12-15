@@ -26,6 +26,9 @@ export const useAppStore = defineStore('appStore', () => {
   const logoShow = ref(true)
   // 标签页面显示
   const tagsViewShow = ref(true)
+  // 标签页面拖拽
+  const tagsViewMove = ref(true)
+
   // 菜单展开方式显示
   const menuShow = ref(false)
   // tagsvews的背景色
@@ -50,7 +53,7 @@ export const useAppStore = defineStore('appStore', () => {
     tagsViewShow,
     menuShow,
     tagsViewBgc,
-    closeSideBar,
+    tagsViewMove,
     openSideBar,
     toggleSideBar,
     changeTagsViewBgc,

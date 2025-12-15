@@ -1,8 +1,9 @@
 <script setup>
-import { computed, KeepAlive, onMounted, watch } from 'vue'
+import { computed, KeepAlive, onMounted, watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useTagsViewStore, useRouterStore, useAppStore } from '@/stores'
 import router from '@/router'
+import Sortable from 'sortablejs'
 const route = useRoute()
 const routerStore = useRouterStore()
 const tagsViewStore = useTagsViewStore()
@@ -36,15 +37,41 @@ watch(
     immediate: true, //初始化立即执行
   },
 )
+// 拖动视图
+const sortable = ref(null)
+const tagRef = ref()
+const permit = computed(() => appStore.tagsViewMove)
+watch(
+  permit,
+  (val) => {
+    sortable.value?.option('disabled', !val)
+  },
+  { immediate: true },
+)
+onMounted(() => {
+  sortable.value = Sortable.create(tagRef.value, {
+    animation: 150,
+    ghostClass: 'ghost',
+    filter: '.affix',
+    onEnd({ oldIndex, newIndex }) {
+      const moved = tags.value.splice(oldIndex, 1)[0]
+      tags.value.splice(newIndex, 0, moved)
+    },
+    onMove(evt) {
+      return !evt.related.classList.contains('affix')
+    },
+  })
+  sortable.value.option('disabled', !permit.value)
+})
 </script>
 <template>
   <el-scrollbar>
-    <div class="tags">
+    <div class="tags" ref="tagRef">
       <router-link
         v-for="tag in tags"
         :to="tag.fullPath"
         :key="tag.fullPath"
-        :class="['tagview', { isactive: tag.fullPath === route.fullPath }]"
+        :class="['tagview', { affix: tag.affix }, { isactive: tag.fullPath === route.fullPath }]"
       >
         {{ tag.title }}
         <div
@@ -61,6 +88,10 @@ watch(
 .isactive {
   background-color: v-bind('appStore.tagsViewBgc');
   color: #fff !important;
+}
+.ghost {
+  opacity: 0.4;
+  background-color: v-bind('appStore.tagsViewBgc');
 }
 
 .tags {
