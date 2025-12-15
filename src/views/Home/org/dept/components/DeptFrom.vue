@@ -1,35 +1,32 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
 import { usedeptDataStore } from '@/stores/modules/deptData.store'
-import { getDeptListAPI } from '@/apis/dept'
+import { messageInfo } from '@/utils'
 // 获取部门数据
 const deptDataStore = usedeptDataStore()
 const loading = ref(true)
-const deptList = ref()
+const deptList = computed(() => deptDataStore.deptList)
 const getDeptList = async () => {
   await deptDataStore.getDeptList()
-  deptList.value = deptDataStore.deptList
   loading.value = false
+}
+// 数据操作
+const handleDelete = async (row) => {
+  popoverIndex.value = -1
+  await deptDataStore.deleteDeptList(row.code)
+  messageInfo('删除成功', 'success')
 }
 
 const popoverIndex = ref(-1)
 onMounted(() => {
-  if (!deptList.value) {
-    getDeptList()
-  }
+  getDeptList()
 })
 </script>
 
 <template>
   <div class="deptFrom">
-    <el-table
-      v-loading="loading"
-      :data="deptList"
-      stripe
-      style="width: 100%"
-      @selection-change="handleSelectionChange"
-    >
+    <el-table v-loading="loading" :data="deptList" stripe style="width: 100%">
       <!-- 勾选框 -->
       <el-table-column type="selection" width="55" />
 
@@ -69,11 +66,16 @@ onMounted(() => {
       <!-- 创建时间 -->
       <el-table-column prop="createTime" label="创建时间" />
 
-      <!-- 操作（ -->
+      <!-- 操作 -->
       <el-table-column label="操作">
         <template #default="scope">
           <div style="width: 76px">
-            <el-button type="primary" :icon="Edit" circle @click="openShowMask(scope.row)" />
+            <el-button
+              type="primary"
+              :icon="Edit"
+              circle
+              @click="deptDataStore.openShowMask({ type: 'edit', data: scope.row })"
+            />
             <el-popover :visible="popoverIndex === scope.$index" placement="top" :width="180">
               <p>你确认要删除吗？</p>
               <div style="text-align: right; margin: 0">
@@ -103,5 +105,7 @@ onMounted(() => {
   border-radius: 20px;
   background: #fff;
   width: 300px;
+  padding: 20px;
+  border-radius: 20px;
 }
 </style>

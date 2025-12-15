@@ -47,19 +47,19 @@ export const constantRoutes = [
     redirect: '/org/employee',
     meta: { title: '组织人事', icon: 'OrganizeIcon' },
     children: [
+
       {
+        path: '/org/dept',
+        name: 'Dept',
+        component: () => import('@/views/Home/org/dept/dept.vue'),
+        meta: { title: '部门管理', icon: 'department' }
+      }, {
         path: '/org/employee',
         name: 'Employee',
 
         component: () => import('@/views/Home/org/employ/employ.vue'),
         meta: { title: '员工管理', icon: 'employee' },
 
-      },
-      {
-        path: '/org/dept',
-        name: 'Dept',
-        component: () => import('@/views/Home/org/dept/dept.vue'),
-        meta: { title: '部门管理', icon: 'department' }
       },
       {
         path: '/org/post',
@@ -89,19 +89,19 @@ export const constantRoutes = [
       {
         path: '/attendance/record',
         name: 'AttendanceRecord',
-        // component: () => import('@/views/attendance/record.vue'),
+        component: () => import('@/views/Home/attendance/record/index.vue'),
         meta: { title: '打卡记录', icon: 'Document' }
       },
       {
         path: '/attendance/schedule',
         name: 'AttendanceSchedule',
-        // component: () => import('@/views/attendance/schedule.vue'),
+        component: () => import('@/views/Home/attendance/schedule/index.vue'),
         meta: { title: '排班管理', icon: 'Collection' }
       },
       {
         path: '/attendance/leave',
         name: 'AttendanceLeave',
-        // component: () => import('@/views/attendance/leave.vue'),
+        component: () => import('@/views/Home/attendance/leave/index.vue'),
         meta: { title: '请假管理', icon: 'Tickets' }
       }
     ]

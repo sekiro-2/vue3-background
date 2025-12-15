@@ -24,9 +24,9 @@ const handleSelectionChange = (rows) => {
 // 控制哪一行的删除弹窗显示
 const popoverIndex = ref(-1)
 const handleDelete = async (row) => {
+  popoverIndex.value = -1
   const res = await deleteEmployListAPI(row.id)
   deptTableData.value = res.data
-  popoverIndex.value = -1
   messageInfo('删除成功', 'success')
 }
 

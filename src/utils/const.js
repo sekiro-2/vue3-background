@@ -319,3 +319,9 @@ export const statusStaffOptions = [
   { label: '离职', value: '离职' },
 ]
 
+export const statusDeptOptions = [
+  { label: '启用', value: '启用' },
+  { label: '停用', value: '停用' },
+
+]
+

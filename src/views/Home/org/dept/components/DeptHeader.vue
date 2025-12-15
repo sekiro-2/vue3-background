@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Download, Plus, Upload } from '@element-plus/icons-vue'
+import { usedeptDataStore } from '@/stores/modules/deptData.store'
 const searcherDept = ref()
 const options = [
   {
@@ -99,6 +100,7 @@ const options = [
     ],
   },
 ]
+const deptDataStore = usedeptDataStore()
 </script>
 <template>
   <div class="deptheader block">
@@ -111,7 +113,11 @@ const options = [
       <el-cascader v-model="searcherDept" :options="options" />
     </div>
     <div class="addstaff">
-      <el-button type="primary" class="button">
+      <el-button
+        type="primary"
+        class="button"
+        @click="deptDataStore.openShowMask({ type: 'add', data: {} })"
+      >
         <el-icon><Plus /></el-icon>添加部门</el-button
       >
       <el-button class="button">

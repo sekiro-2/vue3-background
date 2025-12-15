@@ -1,4 +1,15 @@
 <script setup>
+import { usedeptDataStore } from '@/stores/modules/deptData.store'
+import { watch, watchEffect } from 'vue'
+const deptDataStore = usedeptDataStore()
+console.log(typeof deptDataStore.deptList)
+// watch(
+//   () => deptDataStore.deptList,
+//   (val) => {
+//     console.log('deptList 更新了：', val)
+//   },
+//   { immediate: true },
+// )
 const data = [
   {
     label: '公司总部',
@@ -51,11 +62,42 @@ const data = [
     ],
   },
 ]
+function listToTree(list) {
+  const map = new Map()
+  const tree = []
+
+  list.forEach((item) => {
+    const { parentDept, dept } = item
+
+    // 父节点
+    if (!map.has(parentDept)) {
+      map.set(parentDept, {
+        label: parentDept,
+        children: [],
+      })
+      tree.push(map.get(parentDept))
+    }
+
+    const parentNode = map.get(parentDept)
+
+    // 子节点（防止重复）
+    if (!parentNode.children.find((child) => child.label === dept)) {
+      parentNode.children.push({
+        label: dept,
+        children: [],
+      })
+    }
+  })
+
+  return tree
+}
+const a = listToTree(deptDataStore.deptList)
+console.log(a)
 </script>
 
 <template>
   <div class="depttree">
-    <el-tree accordion default-expand-all="false" :data="data" />
+    <el-tree accordion :default-expand-all="false" :data="data" />
   </div>
 </template>
 <style scoped lang="scss">

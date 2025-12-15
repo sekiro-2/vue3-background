@@ -2,7 +2,7 @@ import Mock from 'mockjs';
 import { employTableData, saveData } from './data'
 
 
-saveData()
+
 // 请求员工列表接口
 Mock.mock('/api/employees', 'get', () => {
   return {
@@ -11,7 +11,7 @@ Mock.mock('/api/employees', 'get', () => {
   };
 });
 // 删除员工
-Mock.mock(/\/api\/employees/, 'delete', (options) => {
+Mock.mock(/\/api\/employees\/delete/, 'delete', (options) => {
   const url = new URL('http://mock.com' + options.url)
   const id = url.searchParams.get('id')
 
@@ -29,7 +29,7 @@ Mock.mock(/\/api\/employees/, 'delete', (options) => {
   }
 })
 // 添加员工
-Mock.mock('/api/employees', 'post', (options) => {
+Mock.mock('/api/employees/add', 'post', (options) => {
   const body = JSON.parse(options.body) // 前端发送的员工信息
   // 生成唯一 id
   const maxId = employTableData.length > 0 ? Math.max(...employTableData.map(i => Number(i.id))) : 0
@@ -47,7 +47,7 @@ Mock.mock('/api/employees', 'post', (options) => {
     data: employTableData
   }
 })
-
+// 编辑员工
 Mock.mock('/api/employees/edit', 'post', (options) => {
   const body = JSON.parse(options.body);
   const index = employTableData.findIndex(emp => emp.id === body.id);
@@ -59,7 +59,7 @@ Mock.mock('/api/employees/edit', 'post', (options) => {
     return { code: 404, message: '员工不存在' };
   }
 });
-
+saveData()
 
 // 设置延迟
 Mock.setup({ timeout: '500-1000' });

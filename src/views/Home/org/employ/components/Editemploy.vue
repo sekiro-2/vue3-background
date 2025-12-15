@@ -38,7 +38,6 @@ const form = reactive({
 })
 const rules = {
   name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
-
   phone: [
     { required: true, message: '请输入手机号码', trigger: 'blur' },
     { pattern: /^1[3-9]\d{9}$/, message: '手机号码格式不正确', trigger: ['blur', 'change'] },
@@ -107,10 +106,10 @@ const editEmployList = async () => {
         </el-form-item>
         <div class="formblock">
           <el-form-item label="手机号码" prop="phone">
-            <el-input v-model="form.phone" />
+            <el-input v-model="form.phone" style="width: 192px" />
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="form.email" />
+            <el-input v-model="form.email" style="width: 192px" />
           </el-form-item>
         </div>
         <div class="formblock">
@@ -172,7 +171,7 @@ const editEmployList = async () => {
 <style scoped lang="scss">
 .editbox {
   width: 430px;
-  height: 500px;
+
   background-color: #fff;
   border-radius: 20px;
   padding: 15px;
@@ -192,9 +191,9 @@ const editEmployList = async () => {
       justify-content: space-between;
     }
   }
-}
-.editbottom {
-  display: flex;
-  justify-content: end;
+  .editbottom {
+    display: flex;
+    justify-content: end;
+  }
 }
 </style>

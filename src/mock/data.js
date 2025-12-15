@@ -69,7 +69,7 @@ const subDepartments = {
 
 
 const deptStatus = ['启用', '停用']
-function genCode() {
+export function genCode() {
   const letters = Mock.Random.string('upper', 2) // 2位大写字母
   const numbers = String(Mock.Random.integer(0, 9999)).padStart(4, '0') // 4位数字
   return letters + numbers
@@ -83,13 +83,14 @@ export const deptData = Array.from({ length: 30 }).map((_, index) => {
   const createTime = Mock.Random.date('yyyy-MM-dd')
   const manager = Mock.Random.cname()
   const code = genCode()
-  const status = Mock.Random.pick(deptStatus)
+  let status = Mock.Random.pick(deptStatus)
   let number = 0
 
 
   if (dept === parentDept) {
     parentDept = '公司'
     number = Mock.Random.integer(50, 200)
+    status = '启用'
   }
   else {
     number = Mock.Random.integer(10, 20)

@@ -1,20 +1,57 @@
 import { useStorage } from '@vueuse/core'
 import { defineStore } from "pinia";
-import { ref } from 'vue';
-import { getDeptListAPI } from '@/apis/dept'
+import { ref, watch } from 'vue';
+import { getDeptListAPI, deleteDeptListAPI, editDeptListAPI, addDeptListAPI } from '@/apis/dept'
 
 export const usedeptDataStore = defineStore('deptDataStore', () => {
   const deptList = ref([])
+  // 开关编辑，添加框
+  const showDeptMosk = ref(false)
+  // 区分编辑与添加框
+  const showMoskType = ref()
+  // 编辑回显数据
+  const editData = ref()
+  const openShowMask = (object) => {
+    showMoskType.value = object.type
+    editData.value = object.data
+    showDeptMosk.value = true
+  }
+  const closeShowMask = () => {
+    showDeptMosk.value = false
+  }
   async function getDeptList() {
     const res = await getDeptListAPI()
+
     deptList.value = res.data
 
+
+
   }
-
-
+  async function deleteDeptList(code) {
+    const res = await deleteDeptListAPI(code)
+    deptList.value = res.data
+  }
+  async function editDeptList(form) {
+    const res = await editDeptListAPI(form)
+    deptList.value = res.data
+  }
+  async function addDeptList(form) {
+    const res = await addDeptListAPI(form)
+    deptList.value = res.data
+  }
+  // watch(
+  //   () => this.deptList,
+  //   () => {
+  //     console.trace('deptList 被修改')
+  //   },
+  //   { deep: true }
+  // )
   return {
     deptList,
-    getDeptList
+    getDeptList,
+    showMoskType,
+    editData,
+    deleteDeptList, showDeptMosk, openShowMask, closeShowMask, editDeptList, addDeptList
   }
 }
 )

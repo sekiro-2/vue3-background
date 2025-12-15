@@ -10,7 +10,7 @@ export function getEmployListAPI() {
 
 export function deleteEmployListAPI(id) {
   return request({
-    url: '/employees',
+    url: '/employees/delete',
     method: 'delete',
     params: {
       id
@@ -20,7 +20,7 @@ export function deleteEmployListAPI(id) {
 }
 export function addEmployListAPI(employee) {
   return request({
-    url: '/employees',   // 对应 Mock.js 接口
+    url: '/employees/add',   // 对应 Mock.js 接口
     method: 'post',
     data: employee           // 使用 data 发送请求体
   })
