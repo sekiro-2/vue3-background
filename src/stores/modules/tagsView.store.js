@@ -33,7 +33,6 @@ export const useTagsViewStore = defineStore('TagsViewStore', () => {
     )
     // 2️⃣ 删除缓存
     if (view.name) {
-
       cachedViews.value = cachedViews.value.filter(
         v => v !== view.name,
       )

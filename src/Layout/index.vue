@@ -20,8 +20,6 @@ watchEffect(() => {
     appStore.closeSideBar()
   }
 })
-
-// ['DeptManage']
 </script>
 
 <template>

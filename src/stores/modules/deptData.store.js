@@ -2,7 +2,7 @@ import { useStorage } from '@vueuse/core'
 import { defineStore } from "pinia";
 import { ref, watch, computed } from 'vue';
 import { getDeptListAPI, deleteDeptListAPI, editDeptListAPI, addDeptListAPI } from '@/apis/dept'
-import { listToTree } from '@/utils/createTree';
+import { createDeptTree } from '@/utils/createTree';
 export const usedeptDataStore = defineStore('deptDataStore', () => {
   const deptList = ref([])
   // 开关编辑，添加框
@@ -37,7 +37,7 @@ export const usedeptDataStore = defineStore('deptDataStore', () => {
     deptList.value = res.data
   }
   const treeData = computed(() => {
-    return listToTree(deptList.value) || []
+    return createDeptTree(deptList.value) || []
   })
 
   return {

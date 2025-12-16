@@ -1,61 +1,97 @@
-<template>
-  <div ref="tagRef" class="tags">
-    <div v-for="tag in tags" :key="tag.fullPath" class="tagview">
-      {{ tag.title }}
-    </div>
-  </div>
-</template>
-
 <script setup>
-import Sortable from 'sortablejs'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
-const tagRef = ref()
-const tags = [
-  {
-    name: 'Dashboard',
-    fullPath: '/dashboard',
-    title: '首页',
-    affix: true,
-    keepAlive: true,
-  },
-  {
-    name: 'Dept',
-    fullPath: '/org/dept',
-    title: '部门管理',
-    keepAlive: true,
-  },
-  {
-    name: 'Employee',
-    fullPath: '/org/employee',
-    title: '员工管理',
-    keepAlive: true,
-  },
-  {
-    name: 'Post',
-    fullPath: '/org/post',
-    title: '岗位管理',
-  },
-  {
-    name: 'Role',
-    fullPath: '/org/role',
-    title: '角色与权限',
-  },
-]
+const value2 = ref(0)
+const box = ref()
+const eyes1 = ref()
+const eyes2 = ref()
+
 onMounted(() => {
-  Sortable.create(tagRef.value, {
-    animation: 150,
-    ghostClass: 'ghost',
-    onEnd({ oldIndex, newIndex }) {
-      const moved = tags.splice(oldIndex, 1)[0]
-      tags.splice(newIndex, 0, moved)
+  watch(
+    () => value2.value,
+    () => {
+      box.value.style.animationDelay = -value2.value + 's'
+      eyes1.value.style.animationDelay = -value2.value + 's'
+      eyes2.value.style.animationDelay = -value2.value + 's'
     },
-  })
+  )
 })
 </script>
 
-<style scoped>
-.ghost {
-  opacity: 0.4;
+<template>
+  <div class="h-500px w-full flex justify-center items-center flex-col">
+    <div
+      class="w200px h-200px rounded-full bg-#fff text-center leading-50px relative box"
+      ref="box"
+    >
+      <div
+        class="w-30px h-30px rounded-full bg-#fff absolute left-50px bottom-100px eyes1"
+        ref="eyes1"
+      ></div>
+      <div
+        class="w-30px h-30px rounded-full bg-#fff absolute left-120px bottom-100px eyes2"
+        ref="eyes2"
+      ></div>
+      <div class="w-85px h-50px bg-#fff absolute left-60px bottom-6px eyes3" ref="eyes3"></div>
+    </div>
+    <div class="w-300px mt-20px">
+      <el-slider v-model="value2" :min="0" :max="1" :step="0.01" />
+    </div>
+  </div>
+  <div class="mouth"></div>
+</template>
+
+<style scoped lang="scss">
+.eyes3 {
+  clip-path: ellipse(34% 28% at 50% 0%);
+}
+.mouth {
+  width: 60px;
+  height: 18px;
+  background: #000;
+  border-radius: 12px;
+}
+
+.test:hover {
+  clip-path: ellipse(50% 35% at 50% 65%);
+}
+.box {
+  animation: move 1s linear forwards paused;
+  flex-direction: column;
+}
+.eyes1 {
+  animation: eyes1 1s linear forwards paused;
+}
+.eyes2 {
+  animation: eyes2 1s linear forwards paused;
+}
+@keyframes eyes1 {
+  0% {
+    clip-path: polygon(0 60%, 100% 0, 100% 100%, 0% 100%); /* 生气 */
+  }
+
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+@keyframes eyes2 {
+  0% {
+    clip-path: polygon(0 0, 100% 60%, 100% 100%, 0% 100%);
+  }
+
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+@keyframes move {
+  0% {
+    background-color: rgb(255, 60, 60); /* 生气 */
+  }
+  50% {
+    background-color: rgb(255, 200, 0); /* 缓和 */
+  }
+  100% {
+    background-color: rgb(60, 200, 120); /* 高兴 */
+  }
 }
 </style>

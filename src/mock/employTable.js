@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import { employTableData, saveData } from './data'
+import { employTableData } from './data/employData'
 
 
 
@@ -19,7 +19,7 @@ Mock.mock(/\/api\/employees\/delete/, 'delete', (options) => {
   const index = employTableData.findIndex(item => item.id === id)
   if (index > -1) {
     employTableData.splice(index, 1)
-    saveData()  // 保存到 localStorage
+    localStorage.setItem('employTableData', JSON.stringify(employTableData))
   }
 
   return {
@@ -34,13 +34,13 @@ Mock.mock('/api/employees/add', 'post', (options) => {
   // 生成唯一 id
   const maxId = employTableData.length > 0 ? Math.max(...employTableData.map(i => Number(i.id))) : 0
   const newEmployee = {
+    ...body,
     id: String(maxId + 1),
-    ...body
   }
 
   // 添加到数组
   employTableData.unshift(newEmployee)
-  saveData()
+  localStorage.setItem('employTableData', JSON.stringify(employTableData))
   return {
     code: 200,
     msg: '添加成功',
@@ -53,13 +53,13 @@ Mock.mock('/api/employees/edit', 'post', (options) => {
   const index = employTableData.findIndex(emp => emp.id === body.id);
   if (index > -1) {
     employTableData[index] = { ...employTableData[index], ...body };
-    saveData()
+    localStorage.setItem('employTableData', JSON.stringify(employTableData))
     return { code: 200, message: '修改成功', data: employTableData[index] };
   } else {
     return { code: 404, message: '员工不存在' };
   }
 });
-saveData()
+// saveData()
 
 // 设置延迟
 Mock.setup({ timeout: '500-1000' });

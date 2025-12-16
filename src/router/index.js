@@ -24,6 +24,7 @@ export const constantRoutes = [
   {
     path: '/dashboard',
     component: Layout,
+    meta: { title: '首页' },
     children: [
       {
         path: '/dashboard',
@@ -45,7 +46,7 @@ export const constantRoutes = [
     path: '/org',
     name: 'Org',
     component: Layout,
-    redirect: '/org/employee',
+    redirect: '/org/dept',
     meta: { title: '组织人事', icon: 'OrganizeIcon' },
     children: [
 
@@ -65,13 +66,13 @@ export const constantRoutes = [
         path: '/org/post',
         name: 'Post',
         component: () => import('@/views/Home/org/post.vue'),
-        meta: { title: '岗位管理', icon: 'position' },
+        meta: { title: '岗位管理', icon: 'position', keepAlive: true },
       },
       {
         path: '/org/role',
         name: 'Role',
-        component: () => import('@/views/Home/org/role.vue'),
-        meta: { title: '角色与权限', icon: 'permission' }
+        component: () => import('@/views/Home/org/role/role.vue'),
+        meta: { title: '角色与权限', icon: 'permission', keepAlive: true }
       }
     ]
   },

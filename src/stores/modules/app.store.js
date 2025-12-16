@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useAppStore = defineStore('appStore', () => {
   // 侧边栏折叠或false展开
-  const sideBarStare = ref(false)
+  const sideBarStare = ref(true)
   // 用户名字
   const userName = ref('张三')
   const openSideBar = () => {
@@ -30,7 +30,7 @@ export const useAppStore = defineStore('appStore', () => {
   const tagsViewMove = ref(true)
 
   // 菜单展开方式显示
-  const menuShow = ref(false)
+  const menuShow = ref(true)
   // tagsvews的背景色
   const tagsViewBgc = ref('#409eff')
   const changeTagsViewBgc = (color) => {
@@ -54,6 +54,7 @@ export const useAppStore = defineStore('appStore', () => {
     menuShow,
     tagsViewBgc,
     tagsViewMove,
+    closeSideBar,
     openSideBar,
     toggleSideBar,
     changeTagsViewBgc,

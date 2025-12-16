@@ -6,12 +6,12 @@ const appStore = useAppStore()
 const them1 = {
   backgroudColor: '#181f31',
   textColor: '#fff',
-  index: '1',
+  index: '2',
 }
 const them2 = {
   backgroudColor: '#fff',
   textColor: '#000',
-  index: '2',
+  index: '1',
 }
 
 const changColor = (value) => {
@@ -25,10 +25,10 @@ const changColor = (value) => {
     <div class="themsetting">
       <el-popover content="默认主题" placement="top" effect="dark">
         <template #reference>
-          <div class="them1" @click="[changColor(them1)]">
+          <div class="them1" @click="[changColor(them2)]">
             <div class="w-[15px]">
               <div class="bg-[#064696] h-[10px] rounded-tl-lg"></div>
-              <div class="bg-[#000] h-[40px] rounded-bl-lg"></div>
+              <div class="bg-[#fff] h-[40px] rounded-bl-lg"></div>
             </div>
             <div class="w-[35px]">
               <div class="bg-[#fff] h-[10px] rounded-tr-lg"></div>
@@ -39,13 +39,12 @@ const changColor = (value) => {
           </div>
         </template>
       </el-popover>
-
-      <el-popover content="亮色主题" placement="top" effect="dark">
+      <el-popover content="黑色主题" placement="top" effect="dark">
         <template #reference>
-          <div class="them1" @click="[changColor(them2)]">
+          <div class="them1" @click="[changColor(them1)]">
             <div class="w-[15px]">
               <div class="bg-[#064696] h-[10px] rounded-tl-lg"></div>
-              <div class="bg-[#fff] h-[40px] rounded-bl-lg"></div>
+              <div class="bg-[#000] h-[40px] rounded-bl-lg"></div>
             </div>
             <div class="w-[35px]">
               <div class="bg-[#fff] h-[10px] rounded-tr-lg"></div>
