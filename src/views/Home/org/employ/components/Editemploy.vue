@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, watch, ref } from 'vue'
-import { CloseBold, Phone } from '@element-plus/icons-vue'
+import { CloseBold } from '@element-plus/icons-vue'
 import { deptStaffOptions, statusStaffOptions, positionOptions, messageInfo } from '@/utils'
 import { addEmployListAPI, editEmployListAPI } from '@/apis/employ'
 
@@ -171,7 +171,6 @@ const editEmployList = async () => {
 <style scoped lang="scss">
 .editbox {
   width: 430px;
-
   background-color: #fff;
   border-radius: 20px;
   padding: 15px;

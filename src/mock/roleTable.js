@@ -1,65 +1,67 @@
-// import Mock from 'mockjs';
-// import { employTableData, saveData } from './data'
+import Mock from 'mockjs';
+import { roleTableData } from './data/roleData'
+import { saveData } from './data/saveData';
 
 
 
-// // 请求员工列表接口
-// Mock.mock('/api/employees', 'get', () => {
-//   return {
-//     code: 200,
-//     data: employTableData
-//   };
-// });
+// 请求员工列表接口
+Mock.mock('/api/role', 'get', () => {
+  return {
+    code: 200,
+    data: roleTableData
+  };
+});
 // // 删除员工
-// Mock.mock(/\/api\/employees\/delete/, 'delete', (options) => {
-//   const url = new URL('http://mock.com' + options.url)
-//   const id = url.searchParams.get('id')
-
-//   // 删除数组中匹配 id 的项
-//   const index = employTableData.findIndex(item => item.id === id)
-//   if (index > -1) {
-//     employTableData.splice(index, 1)
-//     saveData()  // 保存到 localStorage
-//   }
-
-//   return {
-//     code: 200,
-//     msg: '删除成功',
-//     data: employTableData
-//   }
-// })
+Mock.mock(/\/api\/role\/delete/, 'delete', (options) => {
+  const url = new URL('http://mock.com' + options.url)
+  const id = Number(url.searchParams.get('id'))
+  // 删除数组中匹配 id 的项
+  const index = roleTableData.findIndex(item => item.id === id)
+  if (index > -1) {
+    roleTableData.splice(index, 1)
+    saveData('roleTableData', roleTableData)
+  }
+  console.log(roleTableData);
+  return {
+    code: 200,
+    msg: '删除成功',
+    data: roleTableData
+  }
+})
 // // 添加员工
 // Mock.mock('/api/employees/add', 'post', (options) => {
 //   const body = JSON.parse(options.body) // 前端发送的员工信息
 //   // 生成唯一 id
-//   const maxId = employTableData.length > 0 ? Math.max(...employTableData.map(i => Number(i.id))) : 0
+//   const maxId = roleTableData.length > 0 ? Math.max(...roleTableData.map(i => Number(i.id))) : 0
 //   const newEmployee = {
 //     id: String(maxId + 1),
 //     ...body
 //   }
 
 //   // 添加到数组
-//   employTableData.unshift(newEmployee)
+//   roleTableData.unshift(newEmployee)
 //   saveData()
 //   return {
 //     code: 200,
 //     msg: '添加成功',
-//     data: employTableData
+//     data: roleTableData
 //   }
 // })
 // // 编辑员工
-// Mock.mock('/api/employees/edit', 'post', (options) => {
-//   const body = JSON.parse(options.body);
-//   const index = employTableData.findIndex(emp => emp.id === body.id);
-//   if (index > -1) {
-//     employTableData[index] = { ...employTableData[index], ...body };
-//     saveData()
-//     return { code: 200, message: '修改成功', data: employTableData[index] };
-//   } else {
-//     return { code: 404, message: '员工不存在' };
-//   }
-// });
-// saveData()
+Mock.mock('/api/role/edit', 'post', (options) => {
+  const body = JSON.parse(options.body);
+  const index = roleTableData.findIndex(emp => emp.id === body.id);
+  console.log(body);
+  if (index > -1) {
+    roleTableData[index] = { ...roleTableData[index], ...body };
+    saveData('roleTableData', roleTableData)
+    return { code: 200, message: '修改成功', data: roleTableData };
+  } else {
+    return { code: 404, message: '员工不存在' };
+  }
+});
 
-// // 设置延迟
-// Mock.setup({ timeout: '500-1000' });
+
+// 设置延迟
+Mock.setup({ timeout: '500-1000' });
+saveData('roleTableData', roleTableData)

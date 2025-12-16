@@ -21,7 +21,6 @@ export const usedeptDataStore = defineStore('deptDataStore', () => {
   }
   async function getDeptList() {
     const res = await getDeptListAPI()
-
     deptList.value = res.data
   }
   async function deleteDeptList(code) {
@@ -42,7 +41,6 @@ export const usedeptDataStore = defineStore('deptDataStore', () => {
 
   return {
     deptList,
-
     showDeptMosk,
     showMoskType,
     editData,

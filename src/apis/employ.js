@@ -16,7 +16,6 @@ export function deleteEmployListAPI(id) {
       id
     }
   })
-
 }
 export function addEmployListAPI(employee) {
   return request({

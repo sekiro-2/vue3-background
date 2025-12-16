@@ -1,54 +1,39 @@
 <script setup>
-import { onMounted, ref, watch, computed } from 'vue'
+import { onMounted, ref, watch, computed, nextTick } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
-import { usedeptDataStore } from '@/stores/modules/deptData.store'
 import { messageInfo } from '@/utils'
 import { Plus } from '@element-plus/icons-vue'
+import { useRoleDataStore } from '@/stores'
 // 获取部门数据
-const deptDataStore = usedeptDataStore()
-const loading = ref(false)
-const roleList = ref([
-  {
-    id: 1,
-    roleName: '系统管理员',
-    roleCode: 'ADMIN',
-    roleInfo: '拥有系统全部权限，负责系统配置与用户管理',
+const loading = ref(true)
+const roleDataStore = useRoleDataStore()
+const roleList = computed(() => roleDataStore.roleDataList)
+watch(
+  roleList,
+  (newval) => {
+    if (newval) {
+      loading.value = false
+    }
   },
   {
-    id: 2,
-    roleName: '人事管理员',
-    roleCode: 'HR_MANAGER',
-    roleInfo: '负责人事档案、员工入离职及岗位管理',
+    immediate: true,
   },
-  {
-    id: 3,
-    roleName: '部门负责人',
-    roleCode: 'DEPT_LEADER',
-    roleInfo: '负责本部门人员与业务审批',
-  },
-  {
-    id: 4,
-    roleName: '普通员工',
-    roleCode: 'EMPLOYEE',
-    roleInfo: '仅可查看与自身相关的数据',
-  },
-  {
-    id: 5,
-    roleName: '访客',
-    roleCode: 'GUEST',
-    roleInfo: '只读权限，用于临时访问系统',
-  },
-])
+)
 // 数据操作
 const popoverIndex = ref(-1)
-const handleDelete = async (row) => {
+const handleDelete = async (id) => {
   popoverIndex.value = -1
+  roleDataStore.deleteDeptList(id)
+  await nextTick()
   messageInfo('删除成功', 'success')
 }
 const emit = defineEmits(['show'])
 const showData = (row) => {
   emit('show', row)
 }
+onMounted(() => {
+  roleDataStore.getRoleList()
+})
 </script>
 
 <template>
@@ -73,15 +58,21 @@ const showData = (row) => {
           <div style="width: 76px">
             <el-button
               type="primary"
+              :disabled="scope.row.id === 1"
               :icon="Edit"
               circle
-              @click="deptDataStore.openShowMask({ type: 'edit', data: scope.row })"
+              @click="roleDataStore.toggleMosk"
             />
-            <el-popover :visible="popoverIndex === scope.$index" placement="top" :width="180">
+            <el-popover
+              :visible="popoverIndex === scope.$index"
+              placement="top"
+              :width="180"
+              :disabled="scope.row.id === 1"
+            >
               <p>你确认要删除吗？</p>
               <div style="text-align: right; margin: 0">
                 <el-button size="small" text @click="popoverIndex = -1">取消</el-button>
-                <el-button size="small" type="primary" @click="handleDelete(scope.row)">
+                <el-button size="small" type="primary" @click="handleDelete(scope.row.id)">
                   确认
                 </el-button>
               </div>
@@ -90,7 +81,8 @@ const showData = (row) => {
                   type="danger"
                   :icon="Delete"
                   circle
-                  @click="popoverIndex = scope.$index"
+                  :disabled="scope.row.id === 1"
+                  @click.prevent.stop="popoverIndex = scope.$index"
                 />
               </template>
             </el-popover>

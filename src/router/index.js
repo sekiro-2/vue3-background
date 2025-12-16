@@ -62,12 +62,12 @@ export const constantRoutes = [
         meta: { title: '员工管理', icon: 'employee', keepAlive: true },
 
       },
-      {
-        path: '/org/post',
-        name: 'Post',
-        component: () => import('@/views/Home/org/post.vue'),
-        meta: { title: '岗位管理', icon: 'position', keepAlive: true },
-      },
+      // {
+      //   path: '/org/post',
+      //   name: 'Post',
+      //   component: () => import('@/views/Home/org/post.vue'),
+      //   meta: { title: '岗位管理', icon: 'position', keepAlive: true },
+      // },
       {
         path: '/org/role',
         name: 'Role',

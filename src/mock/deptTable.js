@@ -1,7 +1,7 @@
 import Mock from 'mockjs';
 
 import { deptTableData, genCode } from './data/deptData'
-
+import { saveData } from './data/saveData';
 // 请求部门列表接口
 Mock.mock('/api/dept', 'get', () => {
   return {
@@ -17,7 +17,8 @@ Mock.mock(/\/api\/dept\/delete/, 'delete', (options) => {
   const index = deptTableData.findIndex(item => item.code === code)
   if (index > -1) {
     deptTableData.splice(index, 1)
-    localStorage.setItem('employTableData', JSON.stringify(deptTableData))
+
+    saveData('deptTableData', deptTableData)
   }
 
 
@@ -41,7 +42,8 @@ Mock.mock('/api/dept/add', 'post', (options) => {
 
   // 添加到数组
   deptTableData.unshift(newEmployee)
-  localStorage.setItem('employTableData', JSON.stringify(deptTableData))
+  saveData('deptTableData', deptTableData)
+
   return {
     code: 200,
     msg: '添加成功',
@@ -55,7 +57,8 @@ Mock.mock('/api/dept/edit', 'post', (options) => {
   const index = deptTableData.findIndex(emp => emp.code === body.code);
   if (index > -1) {
     deptTableData[index] = { ...deptTableData[index], ...body };
-    localStorage.setItem('employTableData', JSON.stringify(deptTableData))
+    saveData('deptTableData', deptTableData)
+
     return { code: 200, message: '修改成功', data: deptTableData };
   } else {
     return { code: 404, message: '员工不存在' };
@@ -63,3 +66,4 @@ Mock.mock('/api/dept/edit', 'post', (options) => {
 });
 // 设置延迟
 Mock.setup({ timeout: '500-1000' });
+saveData('deptTableData', deptTableData)
