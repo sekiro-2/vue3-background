@@ -6,13 +6,18 @@ defineOptions({
   name: 'Employee',
 })
 const updated = ref(false)
-const updatedForm = () => {
+const sortForm = ref()
+const handleFinishAdd = () => {
   updated.value = true
+}
+const handleSort = (sort) => {
+  sortForm.value = sort
+  updated.value = false
 }
 </script>
 <template>
-  <EmployHeader @to-form="updatedForm"></EmployHeader>
-  <EmployFrom :updated="updated"></EmployFrom>
+  <EmployHeader @to-form="handleFinishAdd" @sort="handleSort"></EmployHeader>
+  <EmployFrom :updated="updated" :sort="sortForm"></EmployFrom>
 </template>
 
 <style scoped lang="scss"></style>

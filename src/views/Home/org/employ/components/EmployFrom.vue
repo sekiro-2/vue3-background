@@ -1,26 +1,28 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
 import Editemploy from './Editemploy.vue'
 import ShowMaskItem from './ShowMaskItem.vue'
-import { getEmployListAPI, deleteEmployListAPI } from '@/apis/employ'
+import { getEmployListAPI, deleteEmployListAPI, sortEmployListAPI } from '@/apis/employ'
 import { messageInfo } from '@/utils'
 
 const props = defineProps({
   updated: Boolean,
+  sort: Object,
 })
 
 const deptTableData = ref([])
 const loading = ref(true)
+// 获取数据
 const getEmployList = async () => {
   const res = await getEmployListAPI()
   deptTableData.value = res.data
   loading.value = false
 }
-// 选择框导出的数据
-const handleSelectionChange = (rows) => {
-  console.log('已选择的行：', rows)
-}
+// // 选择框导出的数据
+// const handleSelectionChange = (rows) => {
+//   console.log('已选择的行：', rows)
+// }
 // 控制哪一行的删除弹窗显示
 const popoverIndex = ref(-1)
 const handleDelete = async (row) => {
@@ -40,6 +42,10 @@ const openShowMask = (row) => {
 const closeShowMask = () => {
   showMask.value = false
 }
+const handleOK = () => {
+  closeShowMask()
+  getEmployList()
+}
 watch(
   () => props.updated,
   (newData) => {
@@ -50,24 +56,25 @@ watch(
   { immediate: true }, // 组件初始化时也执行一次
 )
 
-const handleOK = () => {
-  closeShowMask()
-  getEmployList()
-}
-
+// 筛选功能
+watch(
+  () => props.sort,
+  async (newData) => {
+    if (!newData) return
+    loading.value = true
+    const res = await sortEmployListAPI(newData)
+    loading.value = false
+    deptTableData.value = res.data
+  },
+  { deep: true },
+)
 onMounted(() => {
   getEmployList()
 })
 </script>
 <template>
   <div class="deptmain block">
-    <el-table
-      v-loading="loading"
-      :data="deptTableData"
-      stripe
-      style="width: 100%"
-      @selection-change="handleSelectionChange"
-    >
+    <el-table v-loading="loading" :data="deptTableData" stripe style="width: 100%">
       <el-table-column type="selection" width="55"> </el-table-column>
       <el-table-column prop="name" label="员工信息"> </el-table-column>
       <el-table-column prop="department" label="部门"> </el-table-column>

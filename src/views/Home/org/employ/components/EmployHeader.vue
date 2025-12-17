@@ -1,15 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Download, Plus, Upload } from '@element-plus/icons-vue'
 import { deptStaffOptions, statusStaffOptions, positionOptions } from '@/utils/index'
 import { exportExcel } from '@/utils'
 import Editemploy from './Editemploy.vue'
 import ShowMaskItem from './ShowMaskItem.vue'
-const deptSort = ref('all')
-const statusSort = ref('all')
-const positionSort = ref('all')
 // 添加后告诉employFrom组件更新
-const emit = defineEmits(['to-form'])
+const emit = defineEmits(['to-form', 'sort'])
 // 编辑蒙层
 const showMask = ref(false)
 const openShowMask = () => {
@@ -22,9 +19,15 @@ const handleOk = () => {
   emit('to-form')
   closeShowMask()
 }
-// const handleExport = () => {
-//   exportExcel(tableData.value, '员工数据')
-// }
+// 筛选功能
+const form = reactive({
+  deptSort: 'all',
+  statusSort: 'all',
+  positionSort: 'all',
+})
+const handleSort = () => {
+  emit('sort', form)
+}
 </script>
 <template>
   <div class="deptheader block">
@@ -40,30 +43,32 @@ const handleOk = () => {
       >
     </div>
     <div class="sortstaff">
-      <el-select v-model="deptSort" class="select">
-        <el-option
-          v-for="item in [{ label: '全部部门', value: 'all' }, ...deptStaffOptions]"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-      <el-select v-model="statusSort" class="select">
-        <el-option
-          v-for="item in [{ label: '所有状态', value: 'all' }, ...statusStaffOptions]"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-      <el-select v-model="positionSort" class="select">
-        <el-option
-          v-for="item in [{ label: '全部职位', value: 'all' }, ...positionOptions]"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
+      <el-form :model="form">
+        <el-select v-model="form.deptSort" class="select" @change="handleSort">
+          <el-option
+            v-for="item in [{ label: '全部部门', value: 'all' }, ...deptStaffOptions]"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        <el-select v-model="form.statusSort" class="select" @change="handleSort">
+          <el-option
+            v-for="item in [{ label: '所有状态', value: 'all' }, ...statusStaffOptions]"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        <el-select v-model="form.positionSort" class="select" @change="handleSort">
+          <el-option
+            v-for="item in [{ label: '全部职位', value: 'all' }, ...positionOptions]"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form>
     </div>
   </div>
   <ShowMaskItem

@@ -29,5 +29,13 @@ export function editEmployListAPI(data) {
     url: '/employees/edit',
     method: 'post',
     data
+
   });
+}
+export function sortEmployListAPI(data) {
+  return request({
+    url: '/employees/sort',
+    method: 'post',
+    data
+  })
 }

@@ -11,6 +11,38 @@ Mock.mock('/api/employees', 'get', () => {
     data: employTableData
   };
 });
+// 筛选数据
+Mock.mock('/api/employees/sort', 'post', (options) => {
+  const body = JSON.parse(options.body)
+
+  const deptSort = body.deptSort
+  const statusSort = body.statusSort
+  const positionSort = body.positionSort
+
+
+  let result = employTableData
+
+  // 部门筛选
+  if (deptSort && deptSort !== 'all') {
+    result = result.filter(item => item.department === deptSort)
+  }
+
+  // 状态筛选
+  if (statusSort && statusSort !== 'all') {
+    result = result.filter(item => item.status === statusSort)
+  }
+
+  // 职位筛选
+  if (positionSort && positionSort !== 'all') {
+    result = result.filter(item => item.position === positionSort)
+  }
+
+  return {
+    code: 200,
+    data: result,
+  }
+})
+
 // 删除员工
 Mock.mock(/\/api\/employees\/delete/, 'delete', (options) => {
   const url = new URL('http://mock.com' + options.url)
