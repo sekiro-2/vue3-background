@@ -9,16 +9,23 @@ defineOptions({
   name: 'Role',
 })
 const data = ref()
+const typeData = ref()
 const show = (row) => {
   data.value = row
+}
+const changeRole = (type, form) => {
+  typeData.value = type
+  if (form) {
+    data.value = form
+  }
 }
 </script>
 
 <template>
   <div class="roleContent">
-    <RoleForm @show="show"></RoleForm>
+    <RoleForm @show="show" @change="changeRole"></RoleForm>
     <PermissionForm :data="data"></PermissionForm>
-    <ChangeRole :data="data"></ChangeRole>
+    <ChangeRole :data="data" :type="typeData"></ChangeRole>
   </div>
 </template>
 <style scoped lang="scss">

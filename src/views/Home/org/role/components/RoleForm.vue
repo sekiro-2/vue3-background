@@ -23,13 +23,17 @@ watch(
 const popoverIndex = ref(-1)
 const handleDelete = async (id) => {
   popoverIndex.value = -1
-  roleDataStore.deleteDeptList(id)
+  roleDataStore.deleteRoleList(id)
   await nextTick()
   messageInfo('删除成功', 'success')
 }
-const emit = defineEmits(['show'])
+const emit = defineEmits(['show', 'change'])
 const showData = (row) => {
   emit('show', row)
+}
+const openShowMosk = (type, data) => {
+  emit('change', type, data)
+  roleDataStore.toggleMosk()
 }
 onMounted(() => {
   roleDataStore.getRoleList()
@@ -40,8 +44,8 @@ onMounted(() => {
   <div class="role">
     <div class="roleheader">
       <span class="text-#333 leading-31px">角色管理</span>
-      <el-button type="primary" class="button" @click="openShowMask">
-        <el-icon><Plus /></el-icon>添加员工</el-button
+      <el-button type="primary" class="button" @click="openShowMosk('add', {})">
+        <el-icon><Plus /></el-icon>添加角色</el-button
       >
     </div>
     <el-divider />
@@ -61,7 +65,7 @@ onMounted(() => {
               :disabled="scope.row.id === 1"
               :icon="Edit"
               circle
-              @click="roleDataStore.toggleMosk"
+              @click="openShowMosk('edit')"
             />
             <el-popover
               :visible="popoverIndex === scope.$index"

@@ -3,6 +3,7 @@ import { onMounted, watch, ref, nextTick, reactive } from 'vue'
 import { createRoleTree } from '@/utils/createTree'
 import { constantRoutes } from '@/router'
 import { useRoleDataStore } from '@/stores'
+import { messageInfo } from '@/utils'
 const props = defineProps({
   data: Object,
 })
@@ -13,9 +14,11 @@ function handlePermissionChange(node, { checkedNodes }) {
   editRole.PermissionForm = checkedNodes.map((item) => item.label)
 }
 //
-// const handlechnage = () => {
-//   roleDataStor.editDeptList(editRole)
-// }
+const handlechnage = (id) => {
+  editRole.id = id
+  roleDataStor.editRoleList(editRole)
+  messageInfo('修改成功', 'success')
+}
 const treeRef = ref()
 watch(
   () => props.data,
@@ -50,7 +53,12 @@ watch(
           show-checkbox
           @check="handlePermissionChange"
         />
-        <el-button v-if="data.id !== 1" type="primary" class="button mt-60px" @click="handlechnage">
+        <el-button
+          v-if="data.id !== 1"
+          type="primary"
+          class="button mt-60px"
+          @click="handlechnage(data.id)"
+        >
           修改权限</el-button
         >
       </div>

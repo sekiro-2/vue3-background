@@ -23,7 +23,6 @@ Mock.mock(/\/api\/employees\/delete/, 'delete', (options) => {
     saveData('employTableData', employTableData)
 
   }
-
   return {
     code: 200,
     msg: '删除成功',

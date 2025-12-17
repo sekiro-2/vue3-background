@@ -21,3 +21,10 @@ export function editRoleListAPI(data) {
     data
   });
 }
+export function addRoleListAPI(data) {
+  return request({
+    url: '/role/add',
+    method: 'post',
+    data
+  })
+}
