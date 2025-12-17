@@ -1,23 +1,19 @@
 <script setup>
 import { useAppStore } from '@/stores'
-import { color } from 'echarts'
-import { ref } from 'vue'
 
 const appStore = useAppStore()
-const activeIndex = ref(0)
 const chnageThemeColor = (index, color) => {
-  activeIndex.value = index
-  appStore.changeTagsViewBgc(color)
+  appStore.changeTagsViewBgc(color, index)
 }
 
 const themeColor = [
-  { name: '深空蓝', color: '#409eff' },
-  { name: '雾霾蓝', color: '#4C6E91' },
-  { name: '静谧绿', color: '#2BAE66' },
+  { name: '企业蓝', color: '#409eff' },
+  { name: '警示红', color: '#d60f20' },
+  { name: '科技紫', color: '#ac25e6' },
   { name: '商务橙', color: '#FF9F43' },
-  { name: '危机红', color: '#D63031' },
-  { name: '科技紫', color: '#6C5CE7' },
-  { name: '浅灰底', color: '#F4F6F8' },
+  { name: '生态绿', color: '#4dc86f' },
+  { name: '冷静青', color: '#13c2c2' },
+  { name: '深空灰', color: '#333333' },
 ]
 </script>
 
@@ -37,7 +33,7 @@ const themeColor = [
           @click="chnageThemeColor(index, item.color)"
           :style="{ backgroundColor: item.color }"
         >
-          <div v-if="activeIndex === index" class="i-svg:checkout checkouticon"></div>
+          <div v-if="appStore.colorIndex === index" class="i-svg:checkout checkouticon"></div>
         </div>
       </el-tooltip>
     </div>

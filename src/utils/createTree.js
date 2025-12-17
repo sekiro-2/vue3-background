@@ -1,4 +1,5 @@
 
+
 export function createDeptTree(list) {
   const map = new Map()
   const tree = []
@@ -57,6 +58,40 @@ export const createRoleTree = (constantRoutes) => {
         } else {
           map.set(item.meta.title, {
             label: item.meta.title,
+          })
+        }
+      }
+      // console.log(item)
+      // console.log(map)
+    }
+  })
+
+  map.forEach((value, key) => {
+    tree.push(value)
+    // console.log(value)
+    if (value.children) {
+      const subTree = createRoleTree(value.children)
+      map.get(key).children = subTree
+      // console.log(subTree)
+    }
+  })
+  return tree
+}
+
+export const creatDashboardTree = (constantRoutes) => {
+  const map = new Map()
+  const tree = []
+  constantRoutes.forEach((item) => {
+    if (item.meta?.hidden !== true) {
+      if (!map.has(item.meta.title)) {
+        if (item?.children?.length > 0) {
+          map.set(item.meta.title, {
+            name: item.meta.title,
+            children: item?.children || [],
+          })
+        } else {
+          map.set(item.meta.title, {
+            name: item.meta.title,
           })
         }
       }

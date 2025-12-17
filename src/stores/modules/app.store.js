@@ -12,16 +12,17 @@ export const useAppStore = defineStore('appStore', () => {
   const closeSideBar = () => {
     sideBarStare.value = true
   }
-
   const toggleSideBar = () => {
     sideBarStare.value = !sideBarStare.value
   }
   // 系统侧边栏颜色
   const themeBackgroundColor = ref('#fff')
+  // 选择主题索引
+  const themeIndex = ref('1')
   // 系统侧边栏文字颜色
   const themeTextColor = ref('#000')
 
-  const themeIndex = ref('1')
+
   // logo显示
   const logoShow = ref(true)
   // 标签页面显示
@@ -33,8 +34,11 @@ export const useAppStore = defineStore('appStore', () => {
   const menuShow = ref(true)
   // tagsvews的背景色
   const tagsViewBgc = ref('#409eff')
-  const changeTagsViewBgc = (color) => {
+  // 选择主题颜色索引
+  const colorIndex = ref(0)
+  const changeTagsViewBgc = (color, index) => {
     tagsViewBgc.value = color
+    colorIndex.value = index
   }
   const changeThemeColor = (theme) => {
     themeBackgroundColor.value = theme.backgroudColor,
@@ -54,6 +58,7 @@ export const useAppStore = defineStore('appStore', () => {
     menuShow,
     tagsViewBgc,
     tagsViewMove,
+    colorIndex,
     closeSideBar,
     openSideBar,
     toggleSideBar,

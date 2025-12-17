@@ -1,4 +1,4 @@
-import { ref } from "vue"
+
 
 // 图表数据
 export const lineOption = {
