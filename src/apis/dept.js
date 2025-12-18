@@ -30,3 +30,10 @@ export function addDeptListAPI(data) {
     data
   })
 }
+export function sortDeptListAPI(data) {
+  return request({
+    url: '/dept/sort',
+    method: 'post',
+    data
+  })
+}

@@ -6,15 +6,19 @@ import DeptFrom from './components/DeptFrom.vue'
 import DeptEdit from './components/DeptEdit.vue'
 import { usedeptDataStore } from '@/stores'
 const deptDataStore = usedeptDataStore()
+const filterForm = ref({ dept: null, status: 'all' })
+const handleFilter = (form) => {
+  filterForm.value = form
+}
 defineOptions({
   name: 'Dept',
 })
 </script>
 <template>
-  <DeptHeader></DeptHeader>
+  <DeptHeader @filter="handleFilter"></DeptHeader>
   <div class="contain">
     <DeptTree></DeptTree>
-    <DeptFrom></DeptFrom>
+    <DeptFrom :filter="filterForm"></DeptFrom>
   </div>
 
   <DeptEdit :type="deptDataStore.showMoskType" :data="deptDataStore.editData"></DeptEdit>

@@ -13,22 +13,22 @@ export function createDeptTree(list) {
 
   // 2️ 先收集所有 dept / parentDept 作为节点
   list.forEach((item) => {
-    if (item.status === '启用') {
-      if (!map.has(item.dept)) {
-        map.set(item.dept, {
-          label: item.dept,
-          children: [],
-          value: item.dept
-        })
-      }
-      if (!map.has(item.parentDept)) {
-        map.set(item.parentDept, {
-          label: item.parentDept,
-          children: [],
-          value: item.parentDept
-        })
-      }
+
+    if (!map.has(item.dept)) {
+      map.set(item.dept, {
+        label: item.dept,
+        children: [],
+        value: item.dept
+      })
     }
+    if (!map.has(item.parentDept)) {
+      map.set(item.parentDept, {
+        label: item.parentDept,
+        children: [],
+        value: item.parentDept
+      })
+    }
+
 
   })
   // 3️ 建立父子关系

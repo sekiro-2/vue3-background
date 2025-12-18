@@ -5,8 +5,10 @@ import { usedeptDataStore } from '@/stores/modules/deptData.store'
 import { messageInfo } from '@/utils'
 // 获取部门数据
 const deptDataStore = usedeptDataStore()
-const loading = ref(true)
-const deptList = computed(() => deptDataStore.deptList)
+const loading = computed(() => deptDataStore.loading)
+const deptList = computed(() => {
+  return deptDataStore.deptList
+})
 const getDeptList = async () => {
   await deptDataStore.getDeptList()
   loading.value = false

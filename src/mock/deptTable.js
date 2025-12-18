@@ -9,6 +9,34 @@ Mock.mock('/api/dept', 'get', () => {
     data: deptTableData
   };
 });
+
+// 筛选数据
+Mock.mock('/api/dept/sort', 'post', (options) => {
+  const body = JSON.parse(options.body)
+  const deptSort = body.searcherDept.at(-1) ?? 'all'
+  const statusSort = body.status
+  let result = deptTableData
+
+  // // 部门筛选
+  if (deptSort && deptSort !== 'all') {
+    result = result.filter(item => item.dept === deptSort)
+  }
+
+  // // 状态筛选
+  if (statusSort && statusSort !== 'all') {
+    result = result.filter(item => item.status === statusSort)
+  }
+  // console.log(result);
+  // // 职位筛选
+
+
+
+  return {
+    code: 200,
+    data: result,
+  }
+})
+
 // 删除部门
 Mock.mock(/\/api\/dept\/delete/, 'delete', (options) => {
   const url = new URL('http://mock.com' + options.url)
