@@ -6,7 +6,10 @@ import '@/styles/index.scss'
 import 'element-plus/dist/index.css'
 import 'animate.css';
 import 'uno.css'
-import './mock'
+// 仅在开发环境加载 Mock，避免生产环境拦截真实接口
+if (import.meta.env.DEV) {
+  import('./mock')
+}
 
 
 const app = createApp(App)

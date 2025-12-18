@@ -1,11 +1,12 @@
-// axios的基础封装
+// axios 基础封装
 import axios from 'axios'
 const request = axios.create({
-  baseURL: '/api',
+  // 支持通过环境变量配置后端地址：VITE_API_BASE_URL
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   timeout: 10000
 })
 
-// axios请求拦截器
+// 请求拦截：可在此注入 Token 等认证信息
 request.interceptors.request.use(
   (config) => {
     return config
@@ -13,14 +14,12 @@ request.interceptors.request.use(
   (e) => Promise.reject(e)
 )
 
-// axios响应式拦截器
+// 响应拦截：统一返回数据结构与错误信息
 request.interceptors.response.use(
-  // 成功回调，进行数据剥离，
   (res) => res.data,
-
-  // 失败回调
-  (e) => {
-    return Promise.reject(e)
+  (error) => {
+    const message = error?.response?.data?.message || error.message || '网络错误'
+    return Promise.reject(new Error(message))
   }
 )
 
