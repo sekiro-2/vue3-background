@@ -4,6 +4,7 @@ import Toggle from './components/Toggle.vue'
 import User from './components/User.vue'
 import Fullscreen from '@/components/Fullscreen/index.vue'
 import Setting from './components/Setting.vue'
+import Gitee from './components/Gitee.vue'
 </script>
 
 <template>
@@ -20,6 +21,8 @@ import Setting from './components/Setting.vue'
       <Fullscreen></Fullscreen>
       <!-- 系统设置 -->
       <Setting></Setting>
+      <!-- gitee -->
+      <gitee></gitee>
       <!-- 用户中心 -->
       <User></User>
     </div>
