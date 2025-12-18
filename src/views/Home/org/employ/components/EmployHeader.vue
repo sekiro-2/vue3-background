@@ -20,6 +20,7 @@ const handleOk = () => {
   closeShowMask()
 }
 // 筛选功能
+const formRef = ref()
 const form = reactive({
   deptSort: 'all',
   statusSort: 'all',
@@ -27,6 +28,9 @@ const form = reactive({
 })
 const handleSort = () => {
   emit('sort', form)
+}
+const reset = (formEl) => {
+  formEl.resetFields()
 }
 </script>
 <template>
@@ -43,31 +47,41 @@ const handleSort = () => {
       >
     </div>
     <div class="sortstaff">
-      <el-form :model="form">
-        <el-select v-model="form.deptSort" class="select" @change="handleSort">
-          <el-option
-            v-for="item in [{ label: '全部部门', value: 'all' }, ...deptStaffOptions]"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <el-select v-model="form.statusSort" class="select" @change="handleSort">
-          <el-option
-            v-for="item in [{ label: '所有状态', value: 'all' }, ...statusStaffOptions]"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <el-select v-model="form.positionSort" class="select" @change="handleSort">
-          <el-option
-            v-for="item in [{ label: '全部职位', value: 'all' }, ...positionOptions]"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
+      <el-form :model="form" ref="formRef" inline>
+        <el-form-item prop="deptSort">
+          <el-select v-model="form.deptSort" class="select" @change="handleSort">
+            <el-option
+              v-for="item in [{ label: '全部部门', value: 'all' }, ...deptStaffOptions]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item prop="statusSort">
+          <el-select v-model="form.statusSort" class="select" @change="handleSort">
+            <el-option
+              v-for="item in [{ label: '所有状态', value: 'all' }, ...statusStaffOptions]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item prop="positionSort">
+          <el-select v-model="form.positionSort" class="select" @change="handleSort">
+            <el-option
+              v-for="item in [{ label: '全部职位', value: 'all' }, ...positionOptions]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-button type="primary" plain @click="reset(formRef)"> 重置 </el-button>
       </el-form>
     </div>
   </div>
@@ -79,6 +93,10 @@ const handleSort = () => {
   ></ShowMaskItem>
 </template>
 <style scoped lang="scss">
+.el-button {
+  height: 40px !important;
+}
+
 .block {
   margin-bottom: 24px;
 }

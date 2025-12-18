@@ -104,6 +104,13 @@ export const constantRoutes = [
         name: 'AttendanceLeave',
         component: () => import('@/views/Home/attendance/leave/index.vue'),
         meta: { title: '请假管理', icon: 'Tickets' }
+      },
+      {
+
+        path: '/attendance/leaveself',
+        name: 'AttendanceLeaveSelf',
+        component: () => import('@/views/Home/attendance/leaveSelf/index.vue'),
+        meta: { title: '个人请假', icon: 'Tickets' }
       }
     ]
   },
